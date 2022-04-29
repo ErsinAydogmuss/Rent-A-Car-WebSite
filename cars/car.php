@@ -20,15 +20,15 @@
     <header>
       <div class="container">
         <div class="logo">
-          <a href="index.html">
+          <a href="index.php">
             <img src="img/carIcon.jpg" alt="carIcon" />
           </a>
         </div>
         <div class="menu">
           <ul>
-            <li><a href="book.html">Book</a></li>
-            <li><a href="cars.html">Cars</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="book.php">Book</a></li>
+            <li><a href="cars.php">Cars</a></li>
+            <li><a href="contact.php">Contact</a></li>
             <li><a href="#" id="login-btn">Login</a></li>
           </ul>
         </div>
@@ -37,7 +37,7 @@
           <input type="email" placeholder="Your Email..." class="box" />
           <input type="password" placeholder="Your Password..." class="box" />
           <p>Forget your password? <a href="#">Click Here</a></p>
-          <p>Don't have an account <a href="signUp.html">Create Now</a></p>
+          <p>Don't have an account <a href="signUp.php">Create Now</a></p>
           <input type="submit" value="Login Now" class="btnLgn" />
         </form>
       </div>
@@ -74,7 +74,7 @@
                         Unlimited Milleage <br>  
                     </p>    
                     <h4>1656$</h4>
-                    <a href="car1.html">Select</a>
+                    <a href="car1.php">Select</a>
                 </div>
             </div>
             <div class="col2" id="cont">
@@ -91,7 +91,7 @@
                         Unlimited Milleage <br>  
                     </p>    
                     <h4>987$</h4>
-                    <a href="car1.html">Select</a>
+                    <a href="car1.php">Select</a>
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
                         150 Km <br>  
                     </p>    
                     <h4>854$</h4>
-                    <a href="car1.html">Select</a>
+                    <a href="car1.php">Select</a>
                 </div>
             </div>
             <div class="col2" id="cont">
@@ -127,7 +127,7 @@
                         Unlimited Milleage <br>  
                     </p>    
                     <h4>2656$</h4>
-                    <a href="car1.html">Select</a>
+                    <a href="car1.php">Select</a>
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
         <div class="col3">
           <div class="footerItem">
             <h3>Welcome To Our Site</h3>
-            <a href="index.html">
+            <a href="index.php">
               <img src="img/carIcon2.png" alt="carIcon" />
             </a>
             <p>Thank you for choosing us</p>
@@ -151,10 +151,10 @@
           <div class="footerItem">
             <h3>Quick Links</h3>
             <ul class="footerLinks">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="cars.html">Cars</a></li>
-              <li><a href="myAccount.html">My Account</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="index.php">Home</a></li>
+              <li><a href="cars.php">Cars</a></li>
+              <li><a href="myAccount.php">My Account</a></li>
+              <li><a href="contact.php">Contact</a></li>
             </ul>
           </div>
         </div>

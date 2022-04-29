@@ -35,7 +35,6 @@ body {
   margin: 0 auto;
   gap: 1.8rem;
   grid-template-columns: 14rem auto 23rem;
-  
 }
 a {
   color: #363949;
@@ -156,9 +155,8 @@ main {
   margin-top: 1.4rem;
 }
 
-main h1{
+main h1 {
   padding: 30px;
-  
 }
 
 main .date {
@@ -291,7 +289,7 @@ main .recent-orders table:hover {
   border: 3px solid #b87333;
 }
 
-tr td{
+tr td {
   font-size: 15px;
 }
 
@@ -305,11 +303,11 @@ main table tbody tr:last-child td {
   border: none;
 }
 
-tr td:last-child{
+tr td:last-child {
   text-decoration: underline;
 }
 
-tr td:last-child:hover{
+tr td:last-child:hover {
   text-decoration: none;
 }
 
@@ -439,18 +437,18 @@ tr td:last-child:hover{
 }
 
 /* Customer Settings */
-main .insights .photo{
+main .insights .photo {
   border: none;
 }
 
-main .cust{
+main .cust {
   border: 2px solid #b68e64;
   padding: 15px;
   border-radius: 15px;
   display: inline-block;
 }
 
-main .cust table{
+main .cust table {
   border-spacing: 30px;
 }
 
@@ -508,7 +506,6 @@ main .cust table{
   main table tbody tr td:first-child {
     display: none;
   }
-
 
   @media screen and (max-width: 760px) {
     .container {
@@ -611,6 +608,10 @@ main .cust table{
 
     .right .top button span {
       font-size: 2rem;
+    }
+
+    tr td a:hover{
+      background-color: #b87333;
     }
   }
 }

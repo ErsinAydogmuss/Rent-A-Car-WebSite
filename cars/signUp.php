@@ -21,15 +21,15 @@
     <header>
       <div class="container">
         <div class="logo">
-          <a href="index.html">
+          <a href="index.php">
             <img src="img/carIcon.jpg" alt="carIcon" />
           </a>
         </div>
         <div class="menu">
           <ul>
-            <li><a href="book.html">Book</a></li>
-            <li><a href="cars.html">Cars</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="book.php">Book</a></li>
+            <li><a href="cars.php">Cars</a></li>
+            <li><a href="contact.php">Contact</a></li>
             <li><a href="#" id="login-btn">Login</a></li>
           </ul>
         </div>
@@ -110,7 +110,7 @@
                       <p>Agreed to terms and conditions</p>
                    </div> 
                   <div class="inputfield">
-                    <button type="button" class="btn" onclick="location.href='index.html'">Submit</button>
+                    <button type="button" class="btn" onclick="location.href='index.php'">Submit</button>
                   </div>
                 </div>
             </div>
@@ -124,7 +124,7 @@
         <div class="col3">
           <div class="footerItem">
             <h3>Welcome To Our Site</h3>
-            <a href="index.html">
+            <a href="index.php">
               <img src="img/carIcon2.png" alt="carIcon" />
             </a>
             <p>Thank you for choosing us</p>
@@ -134,10 +134,10 @@
           <div class="footerItem">
             <h3>Quick Links</h3>
             <ul class="footerLinks">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="cars.html">Cars</a></li>
-              <li><a href="myAccount.html">My Account</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="index.php">Home</a></li>
+              <li><a href="cars.php">Cars</a></li>
+              <li><a href="myAccount.php">My Account</a></li>
+              <li><a href="contact.php">Contact</a></li>
             </ul>
           </div>
         </div>

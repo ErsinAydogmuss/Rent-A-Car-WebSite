@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Trips Page</title>
+    <title>Admin Cars Page</title>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
@@ -16,7 +16,7 @@
       <aside>
         <div class="top">
           <div class="logo">
-            <a href="adminHome.html">
+            <a href="adminHome.php">
               <img src="./img/carIcon.jpg" alt="" />
             </a>
           </div>
@@ -25,15 +25,15 @@
           </div>
         </div>
         <div class="sideBar">
-          <a href="adminCustomer.html" class="active">
+          <a href="adminCustomer.php" class="active">
             <span class="material-icons-sharp">person_outline</span>
             <h3>Customers</h3>
           </a>
-          <a href="adminTrips.html">
+          <a href="adminTrips.php">
             <span class="material-icons-sharp">receipt_long</span>
             <h3>Trips</h3>
           </a>
-          <a href="adminCars.html">
+          <a href="adminCars.php">
             <span class="material-icons-sharp"> time_to_leave </span>
             <h3>Cars</h3>
           </a>
@@ -49,7 +49,7 @@
             <span class="material-icons-sharp">settings</span>
             <h3>Settings</h3>
           </a>
-          <a href="index.html">
+          <a href="index.php">
             <span class="material-icons-sharp">logout</span>
             <h3>Logout</h3>
           </a>
@@ -57,107 +57,108 @@
       </aside>
 
       <main>
-        <h1>Trips</h1>
+        <h1>Cars</h1>
         <div class="insights cust">
           <table>
             <thead>
               <tr>
-                <th>Customer Name</th>
-                <th>Customer LastName</th>
-                <th>Car</th>
-                <th>Departure Date</th>
-                <th>Arrival Date</th>
-                <th>Departure Point</th>
-                <th>Arrival Point</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Body Color</th>
+                <th>Km</th>
+                <th>Gearing Type</th>
+                <th>Person</th>
+                <th>First Registration</th>
                 <th>Price</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
                 <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
+                <td>C220</td>
+                <td>White</td>
+                <td>55km</td>
+                <td>Manual</td>
+                <td>5</td>
+                <td>2020</td>
                 <td>856$</td>
                 <td><a href="#">View</a></td>
               </tr>
               <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
                 <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
+                <td>C220</td>
+                <td>White</td>
+                <td>55km</td>
+                <td>Manual</td>
+                <td>5</td>
+                <td>2020</td>
                 <td>856$</td>
                 <td><a href="#">View</a></td>
               </tr>
               <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
                 <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
+                <td>C220</td>
+                <td>White</td>
+                <td>55km</td>
+                <td>Manual</td>
+                <td>5</td>
+                <td>2020</td>
                 <td>856$</td>
                 <td><a href="#">View</a></td>
               </tr>
               <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
                 <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
+                <td>C220</td>
+                <td>White</td>
+                <td>55km</td>
+                <td>Manual</td>
+                <td>5</td>
+                <td>2020</td>
                 <td>856$</td>
                 <td><a href="#">View</a></td>
               </tr>
               <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
                 <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
+                <td>C220</td>
+                <td>White</td>
+                <td>55km</td>
+                <td>Manual</td>
+                <td>5</td>
+                <td>2020</td>
                 <td>856$</td>
                 <td><a href="#">View</a></td>
               </tr>
               <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
                 <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
+                <td>C220</td>
+                <td>White</td>
+                <td>55km</td>
+                <td>Manual</td>
+                <td>5</td>
+                <td>2020</td>
                 <td>856$</td>
                 <td><a href="#">View</a></td>
               </tr>
               <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
                 <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
+                <td>C220</td>
+                <td>White</td>
+                <td>55km</td>
+                <td>Manual</td>
+                <td>5</td>
+                <td>2020</td>
                 <td>856$</td>
                 <td><a href="#">View</a></td>
               </tr>
               <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
                 <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
+                <td>C220</td>
+                <td>White</td>
+                <td>55km</td>
+                <td>Manual</td>
+                <td>5</td>
+                <td>2020</td>
                 <td>856$</td>
                 <td><a href="#">View</a></td>
               </tr>
@@ -180,6 +181,51 @@
               <img src="img/pic-33.png" />
             </div>
           </div>
+        </div>
+        <div class="recent-updates">
+          <h2>Recently Rented Cars</h2>
+          <div class="updates">
+            <div class="update">
+              <div class="profile-photo">
+                <img src="img/car22.jpg" />
+              </div>
+              <div class="message">
+                <p><b>BMW</b></p>
+                <small class="text-muted">2 Minutes Ago</small>
+              </div>
+            </div>
+            <div class="update">
+              <div class="profile-photo">
+                <img src="img/car33.jpg" />
+              </div>
+              <div class="message">
+                <p><b>Mercedes</b></p>
+                <small class="text-muted">23 Minutes Ago</small>
+              </div>
+            </div>
+            <div class="update">
+              <div class="profile-photo">
+                <img src="img/car44.jpg" />
+              </div>
+              <div class="message">
+                <p><b>Audi</b></p>
+                <small class="text-muted">12 Hours Ago</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sales-analytics">
+            <div class="item add-product">
+              <div>
+                <span class="material-icons-sharp">add</span>
+                <h3>Add Car</h3>
+              </div>
+              <div>
+                <span class="material-icons-sharp">update</span>
+                <h3>Update Car</h3>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
