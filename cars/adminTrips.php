@@ -14,7 +14,8 @@ if ($admin['Role'] == 0) {
   exit;
 }
 
-$sql2 = $db->prepare("SELECT * FROM booking");
+$sql2 = $db->prepare("SELECT IdBooking, u.IdUser, Name, LastName, c.IdCar, CarName, ModelYear, FromDate, ToDate, PickUpLocation, datediff(ToDate, FromDate)*c.PricePerDay as Price, Message, Rate, Status  
+FROM booking b INNER JOIN cars c ON b.IdCar = c.IdCar INNER JOIN users u ON u.IdUser = b.IdUser INNER JOIN review r ON r.IdReview = b.IdReview");
 $sql2->execute();
 
 ?>
@@ -58,7 +59,7 @@ $sql2->execute();
             <span class="material-icons-sharp"> time_to_leave </span>
             <h3>Cars</h3>
           </a>
-          <a href="#">
+          <a href="adminMessages.php">
             <span class="material-icons-sharp">mail_outline</span>
             <h3>Messages</h3>
           </a>
@@ -83,105 +84,49 @@ $sql2->execute();
           <table>
             <thead>
               <tr>
+                <th>Book Id</th>
+                <th>Customer Id</th>
                 <th>Customer Name</th>
-                <th>Customer LastName</th>
-                <th>Car</th>
-                <th>Departure Date</th>
-                <th>Arrival Date</th>
-                <th>Departure Point</th>
-                <th>Arrival Point</th>
+                <th>Customer Surname</th>
+                <th>Car Id</th>
+                <th>Car Name</th>
+                <th>Car Model Year</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Pick Up Location</th>
                 <th>Price</th>
+                <th>Review</th>
+                <th>Rate</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
+              
+              <?php 
+              
+              while($book = $sql2->fetch(PDO::FETCH_ASSOC)) {
+
+              ?>
+
               <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
-                <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
-                <td>856$</td>
-                <td><a href="#">View</a></td>
+                <td><?php echo $book['IdBooking'] ?></td>
+                <td><?php echo $book['IdUser'] ?></td>
+                <td><?php echo $book['Name'] ?></td>
+                <td><?php echo $book['LastName'] ?></td>
+                <td><?php echo $book['IdCar'] ?></td>
+                <td><?php echo $book['CarName'] ?></td>
+                <td><?php echo $book['ModelYear'] ?></td>
+                <td><?php echo $book['FromDate'] ?></td>
+                <td><?php echo $book['ToDate'] ?></td>
+                <td><?php echo $book['PickUpLocation'] ?></td>
+                <td><?php echo $book['Price'] ?></td>
+                <td><?php echo $book['Message'] ?></td>
+                <td><?php echo $book['Rate'] ?></td>
+                <td><?php echo $book['Status'] ?></td>
               </tr>
-              <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
-                <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
-                <td>856$</td>
-                <td><a href="#">View</a></td>
-              </tr>
-              <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
-                <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
-                <td>856$</td>
-                <td><a href="#">View</a></td>
-              </tr>
-              <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
-                <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
-                <td>856$</td>
-                <td><a href="#">View</a></td>
-              </tr>
-              <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
-                <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
-                <td>856$</td>
-                <td><a href="#">View</a></td>
-              </tr>
-              <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
-                <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
-                <td>856$</td>
-                <td><a href="#">View</a></td>
-              </tr>
-              <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
-                <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
-                <td>856$</td>
-                <td><a href="#">View</a></td>
-              </tr>
-              <tr>
-                <td>Ersin</td>
-                <td>Aydogmus</td>
-                <td>BMW</td>
-                <td>05.05.2022</td>
-                <td>08.05.2022</td>
-                <td>Ankara</td>
-                <td>Antalya</td>
-                <td>856$</td>
-                <td><a href="#">View</a></td>
-              </tr>
+
+              <?php } ?>
+
             </tbody>
           </table>
         </div>

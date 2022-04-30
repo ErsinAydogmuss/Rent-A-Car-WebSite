@@ -14,7 +14,7 @@ if ($admin['Role'] == 0) {
   exit;
 }
 
-$sql2 = $db->prepare("SELECT * FROM cars");
+$sql2 = $db->prepare("SELECT * FROM contactUs");
 $sql2->execute();
 
 ?>
@@ -78,47 +78,35 @@ $sql2->execute();
       </aside>
 
       <main>
-        <h1>Cars</h1>
+        <h1>Messages</h1>
         <div class="insights cust">
           <table>
             <thead>
               <tr>
-                <th>Image</th>
-                <th>Car Id</th>
-                <th>Car Name</th>
-                <th>Model Year</th>
-                <th>Creation Date</th>
-                <th>Updation Date</th>
-                <th>Seating Capacity</th>
-                <th>Fuel Type</th>
-                <th>Price</th>
-                <th></th>
-                <th></th>
+                <th>Countact Id</th>
+                <th>Full Name</th>
+                <th>E-Mail</th>
+                <th>Phone Number</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Posting Date</th>
               </tr>
             </thead>
             <tbody>
               
               <?php 
               
-                while($car = $sql2->fetch(PDO::FETCH_ASSOC)) {
+                while($contact = $sql2->fetch(PDO::FETCH_ASSOC)) {
 
               ?>
               <tr>
-                <td><img src="<?php echo $car['Image'] ?>" alt=""></td>
-                <td><?php echo $car['IdCar'] ?></td>
-                <td><?php echo $car['CarName'] ?></td>
-                <td><?php echo $car['ModelYear'] ?></td>
-                <td><?php echo $car['CreationDate'] ?></td>
-                <td><?php echo $car['UpdationDate'] ?></td>
-                <td><?php echo $car['SeatingCapacity'] ?></td>
-                <td><?php echo $car['FuelType'] ?></td>
-                <td><?php echo $car['PricePerDay'] ?></td>
-                <td class="but" >
-                  <a href="editCustomer.php"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Edit</button></a>
-                </td>
-                <td>
-                  <a href="editCustomer.php"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Delete</button></a>
-                </td>
+                <td><?php echo $contact['IdContactUs'] ?></td>
+                <td><?php echo $contact['FullName'] ?></td>
+                <td><?php echo $contact['Email'] ?></td>
+                <td><?php echo $contact['PhoneNumber'] ?></td>
+                <td><?php echo $contact['Subject'] ?></td>
+                <td><?php echo $contact['Message'] ?></td>
+                <td><?php echo $contact['PostingDate'] ?></td>
               </tr>
 
               <?php } ?>
@@ -127,33 +115,6 @@ $sql2->execute();
           </table>
         </div>
       </main>
-
-      <div class="right">
-        <div class="top">
-          <button id="menu-btn">
-            <span class="material-icons-sharp">menu</span>
-          </button>
-          <div class="profile">
-            <div class="info">
-              <p>Hey, <b>Ersin</b></p>
-              <small class="text-muted">Admin</small>
-            </div>
-            <div class="profile-photo">
-              <img src="img/pic-33.png" />
-            </div>
-          </div>
-        </div>
-        
-        <div class="sales-analytics">
-            <div class="item add-product">
-              <div>
-                <span class="material-icons-sharp">add</span>
-                <h3>Add Car</h3>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
     </div>
 
     <script src="js/script.js"></script>

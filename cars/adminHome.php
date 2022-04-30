@@ -14,6 +14,12 @@ if ($admin['Role'] == 0) {
   exit;
 }
 
+$sql2 = $db->prepare("SELECT sum(price) as Total, count(price) as Count FROM Booking");
+$sql2->execute();
+
+$sql3 = $db->prepare("SELECT count(IdCar) as CountCar FROM Cars");
+$sql2->execute();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +59,7 @@ if ($admin['Role'] == 0) {
           <span class="material-icons-sharp"> time_to_leave </span>
           <h3>Cars</h3>
         </a>
-        <a href="#">
+        <a href="adminMessages.php">
           <span class="material-icons-sharp">mail_outline</span>
           <h3>Messages</h3>
         </a>
@@ -77,6 +83,9 @@ if ($admin['Role'] == 0) {
       <div class="date">
         <input type="date" />
       </div>
+      
+      <?php $total = $sql2->fetch(PDO::FETCH_ASSOC) ?>
+      <?php $totalCar = $sql3->fetch(PDO::FETCH_ASSOC) ?>
 
       <div class="insights">
         <div class="sales">
@@ -84,54 +93,27 @@ if ($admin['Role'] == 0) {
           <div class="middle">
             <div class="left">
               <h3>Total Sales</h3>
-              <h1>$658</h1>
-            </div>
-            <div class="progress">
-              <svg>
-                <circle cx="38" cy="38" r="36"></circle>
-              </svg>
-              <div class="number">
-                <p>%98</p>
-              </div>
+              <h1> $ <?php echo $total['Total'] ?></h1>
             </div>
           </div>
-          <small class="text-muted">Last 24 Hours</small>
         </div>
         <div class="expenses">
           <span class="material-icons-sharp">bar_chart</span>
           <div class="middle">
             <div class="left">
-              <h3>Total Expenses</h3>
-              <h1>$14</h1>
-            </div>
-            <div class="progress">
-              <svg>
-                <circle cx="38" cy="38" r="36"></circle>
-              </svg>
-              <div class="number">
-                <p>%67</p>
-              </div>
+              <h3>Total Rentals</h3>
+              <h1><?php echo $total['Count'] ?></h1>
             </div>
           </div>
-          <small class="text-muted">Last 24 Hours</small>
         </div>
         <div class="income">
           <span class="material-icons-sharp">stacked_line_chart</span>
           <div class="middle">
             <div class="left">
-              <h3>Total Income</h3>
-              <h1>$658</h1>
-            </div>
-            <div class="progress">
-              <svg>
-                <circle cx="38" cy="38" r="36"></circle>
-              </svg>
-              <div class="number">
-                <p>%53</p>
-              </div>
+              <h3>Total Cars</h3>
+              <h1><?php echo $totalCar['CountCar'] ?></h1>
             </div>
           </div>
-          <small class="text-muted">Last 24 Hours</small>
         </div>
       </div>
       <div class="recent-orders">

@@ -32,10 +32,10 @@ $sql2->execute();
   <title>Admin Customers Page</title>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
-  
+
 
   <link rel="stylesheet" href="./css/admin.css" />
-  
+
 </head>
 
 <body>
@@ -64,7 +64,7 @@ $sql2->execute();
           <span class="material-icons-sharp"> time_to_leave </span>
           <h3>Cars</h3>
         </a>
-        <a href="#">
+        <a href="adminMessages.php">
           <span class="material-icons-sharp">mail_outline</span>
           <h3>Messages</h3>
         </a>
@@ -99,14 +99,15 @@ $sql2->execute();
               <th>Birthdate</th>
               <th>Registration Date</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
 
             <?php
 
-            while ($user = $sql2->fetch(PDO::FETCH_ASSOC)) { 
-            
+            while ($user = $sql2->fetch(PDO::FETCH_ASSOC)) {
+
             ?>
 
 
@@ -120,7 +121,7 @@ $sql2->execute();
                 <td><?php echo $user['Country'] ?></td>
                 <td><?php echo $user['BirthDate'] ?></td>
                 <td><?php echo $user['RegDate'] ?></td>
-                <td>
+                <td class="but">
                   <a href="editCustomer.php"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Edit</button></a>
                 </td>
                 <td>
@@ -138,7 +139,27 @@ $sql2->execute();
         </table>
       </div>
     </main>
+
+    <div class="right">
+      <div class="top">
+        <button id="menu-btn">
+          <span class="material-icons-sharp">menu</span>
+        </button>
+        <div class="profile">
+          <div class="info">
+            <p>Hey, <b><?php echo $admin['Name'] ?></b></p>
+            <small class="text-muted">Admin</small>
+          </div>
+          <div class="profile-photo">
+            <img src="img/pic-33.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+
 
   <script src="js/script.js"></script>
 </body>
