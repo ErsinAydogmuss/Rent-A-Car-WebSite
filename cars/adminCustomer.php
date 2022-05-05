@@ -139,24 +139,7 @@ $sql2->execute();
         </table>
       </div>
     </main>
-
-    <div class="right">
-      <div class="top">
-        <button id="menu-btn">
-          <span class="material-icons-sharp">menu</span>
-        </button>
-        <div class="profile">
-          <div class="info">
-            <p>Hey, <b><?php echo $admin['Name'] ?></b></p>
-            <small class="text-muted">Admin</small>
-          </div>
-          <div class="profile-photo">
-            <img src="img/pic-33.png" />
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
   </div>
 
 

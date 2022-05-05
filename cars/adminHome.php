@@ -3,11 +3,11 @@ include 'connection/config2.php';
 ob_start();
 session_start();
 
-$sql = $db -> prepare("SELECT * FROM users WHERE Email=:email");
-$sql -> execute(array(
+$sql = $db->prepare("SELECT * FROM users WHERE Email=:email");
+$sql->execute(array(
   'email' => $_SESSION['email']
 ));
-$admin = $sql -> fetch(PDO::FETCH_ASSOC);
+$admin = $sql->fetch(PDO::FETCH_ASSOC);
 
 if ($admin['Role'] == 0) {
   Header("Location:adminLogin.php");
@@ -18,7 +18,24 @@ $sql2 = $db->prepare("SELECT sum(price) as Total, count(price) as Count FROM Boo
 $sql2->execute();
 
 $sql3 = $db->prepare("SELECT count(IdCar) as CountCar FROM Cars");
-$sql2->execute();
+$sql3->execute();
+
+$sql4 = $db->prepare("SELECT count(IdUser) AS CountUser FROM users WHERE Role = 0");
+$sql4->execute();
+
+$sql5 = $db->prepare("SELECT IdBooking, u.IdUser, Name, LastName, c.IdCar, CarName, ModelYear, FromDate, ToDate, PickUpLocation, datediff(ToDate, FromDate)*c.PricePerDay as Price, Message, Rate, Status  
+FROM booking b INNER JOIN cars c ON b.IdCar = c.IdCar INNER JOIN users u ON u.IdUser = b.IdUser INNER JOIN review r ON r.IdReview = b.IdReview");
+$sql5->execute();
+
+$sql6 = $db->prepare("SELECT * FROM booking b INNER JOIN users u ON b.IdUser = u.IdUser INNER JOIN review r ON b.IdReview = r.IdReview");
+$sql6->execute();
+
+$sql7 = $db->prepare("SELECT count(IdUser) as CountAdmin FROM Users WHERE Role = 1");
+$sql7->execute();
+
+$sql8 = $db->prepare("SELECT AVG(Rate) as Rate FROM Cars");
+$sql8->execute();
+
 
 ?>
 <!DOCTYPE html>
@@ -80,16 +97,18 @@ $sql2->execute();
     <main>
       <h1>Dashboard</h1>
 
-      <div class="date">
-        <input type="date" />
-      </div>
-      
-      <?php $total = $sql2->fetch(PDO::FETCH_ASSOC) ?>
-      <?php $totalCar = $sql3->fetch(PDO::FETCH_ASSOC) ?>
+      <?php 
+      $total = $sql2->fetch(PDO::FETCH_ASSOC);
+      $totalCar = $sql3->fetch(PDO::FETCH_ASSOC);
+      $totalUser = $sql4->fetch(PDO::FETCH_ASSOC);
+      $totalAdmin = $sql7->fetch(PDO::FETCH_ASSOC);
+      $AvgRate = $sql8->fetch(PDO::FETCH_ASSOC);
+      ?>
 
       <div class="insights">
+
         <div class="sales">
-          <span class="material-icons-sharp">analytics</span>
+          <span class="material-icons-sharp">attach_money</span>
           <div class="middle">
             <div class="left">
               <h3>Total Sales</h3>
@@ -107,7 +126,7 @@ $sql2->execute();
           </div>
         </div>
         <div class="income">
-          <span class="material-icons-sharp">stacked_line_chart</span>
+          <span class="material-icons-sharp">car_rental</span>
           <div class="middle">
             <div class="left">
               <h3>Total Cars</h3>
@@ -115,55 +134,80 @@ $sql2->execute();
             </div>
           </div>
         </div>
+        <div class="income">
+          <span class="material-icons-sharp">person</span>
+          <div class="middle">
+            <div class="left">
+              <h3>Total Customers</h3>
+              <h1><?php echo $totalUser['CountUser'] ?></h1>
+            </div>
+          </div>
+        </div>
+        <div class="sales">
+          <span class="material-icons-sharp">admin_panel_settings</span>
+          <div class="middle">
+            <div class="left">
+              <h3>Total Admin</h3>
+              <h1><?php echo $totalAdmin['CountAdmin'] ?></h1>
+            </div>
+          </div>
+        </div>
+        <div class="sales">
+          <span class="material-icons-sharp">star</span>
+          <div class="middle">
+            <div class="left">
+              <h3>Car Average Rating</h3>
+              <h1><?php echo $AvgRate['Rate'] ?></h1>
+            </div>
+          </div>
+        </div>
       </div>
+
+
+
+
+
+
       <div class="recent-orders">
-        <h2>Recent Trips</h2>
+        <h2>Recent Rentals</h2>
         <table>
           <thead>
             <tr>
-              <th>Product Name</th>
-              <th>Product Number</th>
-              <th>Payment</th>
+              <th>Book Id</th>
+              <th>Customer Name</th>
+              <th>Customer Surname</th>
+              <th>Car Name</th>
+              <th>Car Model Year</th>
+              <th>From Date</th>
+              <th>To Date</th>
+              <th>Pick Up Location</th>
+              <th>Price</th>
+              <th>Rate</th>
               <th>Status</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>BMW</td>
-              <td>123</td>
-              <td>Due</td>
-              <td>Pending</td>
-              <td class="primary"><a href="">Details</a></td>
-            </tr>
-            <tr>
-              <td>AUDI</td>
-              <td>321</td>
-              <td>Due</td>
-              <td class="warning">Pending</td>
-              <td class="primary"><a href="">Details</a></td>
-            </tr>
-            <tr>
-              <td>MERCEDES</td>
-              <td>213</td>
-              <td>Due</td>
-              <td>Pending</td>
-              <td class="primary"><a href="">Details</a></td>
-            </tr>
-            <tr>
-              <td>OPEL</td>
-              <td>345</td>
-              <td>Due</td>
-              <td>Pending</td>
-              <td class="primary"><a href="">Details</a></td>
-            </tr>
-            <tr>
-              <td>FIAT</td>
-              <td>678</td>
-              <td>Due</td>
-              <td>Pending</td>
-              <td class="primary"><a href="">Details</a></td>
-            </tr>
+
+            <?php
+            for ($i = 0; $i < 10; $i++) {
+              $book = $sql5->fetch(PDO::FETCH_ASSOC);
+              if ($book) {
+            ?>
+                <tr>
+                  <td><?php echo $book['IdBooking'] ?></td>
+                  <td><?php echo $book['Name'] ?></td>
+                  <td><?php echo $book['LastName'] ?></td>
+                  <td><?php echo $book['CarName'] ?></td>
+                  <td><?php echo $book['ModelYear'] ?></td>
+                  <td><?php echo $book['FromDate'] ?></td>
+                  <td><?php echo $book['ToDate'] ?></td>
+                  <td><?php echo $book['PickUpLocation'] ?></td>
+                  <td><?php echo $book['Price'] ?></td>
+                  <td><?php echo $book['Rate'] ?></td>
+                  <td><?php echo $book['Status'] ?></td>
+                </tr>
+            <?php }
+            } ?>
           </tbody>
         </table>
       </div>
@@ -178,92 +222,29 @@ $sql2->execute();
             <p>Hey, <b><?php echo $admin['Name'] ?></b></p>
             <small class="text-muted">Admin</small>
           </div>
-          <div class="profile-photo">
-            <img src="img/pic-33.png" />
-          </div>
         </div>
       </div>
       <div class="recent-updates">
-        <h2>Recent Updates</h2>
+        <h2>Recent Reviews</h2>
         <div class="updates">
+
+          <?php for($i = 0; $i<20; $i++){ 
+            $review = $sql6->fetch(PDO::FETCH_ASSOC);
+            if($review){
+          ?>
+
           <div class="update">
             <div class="profile-photo">
-              <img src="img/pic-22.png" />
+              <img src="<?php echo $review['UserImage'] ?>" alt="">
             </div>
             <div class="message">
-              <p><b>Agatha Doe</b> Very well..</p>
-              <small class="text-muted">2 Minutes Ago</small>
+              <p><b><?php echo $review['Name']." ".$review['LastName']." : ";
+              ?>
+              </b> <?php echo $review['Message']?></p>
             </div>
           </div>
-          <div class="update">
-            <div class="profile-photo">
-              <img src="img/pic-44.png" />
-            </div>
-            <div class="message">
-              <p><b>Amy Soe</b> Very well..</p>
-              <small class="text-muted">2 Minutes Ago</small>
-            </div>
-          </div>
-          <div class="update">
-            <div class="profile-photo">
-              <img src="img/profil22.jpg" />
-            </div>
-            <div class="message">
-              <p><b>Carmen Joe</b> Very well..</p>
-              <small class="text-muted">2 Minutes Ago</small>
-            </div>
-          </div>
+          <?php }} ?>
         </div>
-      </div>
-      <div class="sales-analytics">
-        <h2>Sales Analytics</h2>
-        <div class="item online">
-          <div class="icon">
-            <span class="material-icons-sharp">shopping_cart</span>
-          </div>
-          <div class="right">
-            <div class="info">
-              <h3>Online Orders</h3>
-              <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <h5 class="success">+39%</h5>
-            <h3>3849</h3>
-          </div>
-        </div>
-        <div class="item offline">
-          <div class="icon">
-            <span class="material-icons-sharp">local_mall</span>
-          </div>
-          <div class="right">
-            <div class="info">
-              <h3>Offline Orders</h3>
-              <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <h5 class="danger">-17%</h5>
-            <h3>1100</h3>
-          </div>
-        </div>
-        <div class="item customers">
-          <div class="icon">
-            <span class="material-icons-sharp">person</span>
-          </div>
-          <div class="right">
-            <div class="info">
-              <h3>New Customers</h3>
-              <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <h5 class="success">+25%</h5>
-            <h3>849</h3>
-          </div>
-        </div>
-        <a href="">
-          <div class="item add-product">
-            <div>
-              <span class="material-icons-sharp">add</span>
-              <h3>Add Car</h3>
-            </div>
-          </div>
-        </a>
       </div>
     </div>
   </div>
