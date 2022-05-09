@@ -1,3 +1,12 @@
+<?php 
+  include 'connection/config2.php';
+  ob_start();
+  session_start();
+
+  $sql2 = $db->prepare("SELECT c.IdCar, COUNT(c.IdCar), c.CarName, c.FuelType, c.ModelYear, c.PricePerDay, c.SeatingCapacity, c.Transmission, c.CarImage FROM booking b INNER JOIN cars c ON b.IdCar = c.IdCar GROUP BY c.IdCar order by COUNT(c.IdCar) DESC");
+  $sql2->execute();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,63 +61,6 @@
       </div>
     </section>
 
-    <!-- Feature Section -->
-
-    <section id="features" class="sectionArea">
-      <div class="featuresTop">
-        <h2 class="sectionHeader">Featured Cars</h2>
-      </div>
-      <div class="featuresBody">
-        <div class="container">
-          <div class="col3">
-            <div class="item">
-              <div class="zoom">
-                <img src="img/car1.jpg" alt="car" />
-              </div>
-              <div class="itemText">
-                <h3>BMW</h3>
-                <p>
-                  5 Seats<br />Automatic<br />1 Large Bag<br />1 Small Bag<br />Unlimited
-                  Milleage<br />656$
-                </p>
-                <a href="#" class="btnDetails">View Details</a>
-              </div>
-            </div>
-          </div>
-          <div class="col3">
-            <div class="item">
-              <div class="zoom">
-                <img src="img/car2.jpg" alt="car" />
-              </div>
-              <div class="itemText">
-                <h3>AUDI</h3>
-                <p>
-                  5 Seats<br />Automatic<br />1 Large Bag<br />1 Small Bag<br />Unlimited
-                  Milleage<br />656$
-                </p>
-                <a href="#" class="btnDetails">View Details</a>
-              </div>
-            </div>
-          </div>
-          <div class="col3">
-            <div class="item">
-              <div class="zoom">
-                <img src="img/car3.jpg" alt="car" />
-              </div>
-              <div class="itemText">
-                <h3>MERCEDES</h3>
-                <p>
-                  5 Seats<br />Automatic<br />1 Large Bag<br />1 Small Bag<br />Unlimited
-                  Milleage<br />656$
-                </p>
-                <a href="#" class="btnDetails">View Details</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Parallax Section -->
 
     <section id="parallax" class="sectionArea">
@@ -118,68 +70,43 @@
       </div>
     </section>
 
-    <!-- Review Section -->
+    <!-- Feature Section -->
 
-    <section class="review" id="review">
-      <div class="reviewTop">
-        <h2 class="sectionHeader">Reviews</h2>
+    <section id="features" class="sectionArea">
+      <div class="featuresTop">
+        <h2 class="sectionHeader">Featured Cars</h2>
       </div>
-      <div class="reviewBody">
+      <div class="featuresBody">
         <div class="container">
+
+          <?php 
+            for ($i = 0; $i < 3; $i++) {
+              $car = $sql2->fetch(PDO::FETCH_ASSOC);
+          ?>
+
           <div class="col3">
-            <img src="img/profil1.jpg" alt="" />
-            <hr />
-            <h3>Agatha Doe</h3>
-            <p>
-              Lorem ipsum dolor sit, amet consectur adipisicin elit Unde sunt
-              fugiat dolore ipsum id est maxime ad tempore quasi tenetur
-            </p>
-            <br>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
+            <div class="item">
+              <div class="zoom">
+                <img src="img/<?php echo $car['CarImage']?>" alt="" />
+              </div>
+              <div class="itemText">
+                <h3><?php echo $car['CarName']?></h3>
+                <p>
+                  <?php echo $car['ModelYear']?><br /><?php echo $car['SeatingCapacity']?><br /><?php echo $car['Transmission']?><br /><?php echo $car['FuelType']?><br /><?php echo $car['PricePerDay']?>
+                  $<br />
+                </p>
+                <a href="#" class="btnDetails">View Details</a>
+              </div>
             </div>
           </div>
-          <div class="col3">
-            <img src="img/profil2.jpg" alt="" />
-            <hr />
-            <h3>Amy Soe</h3>
-            <p>
-              Lorem ipsum dolor sit, amet consectur adipisicin elit Unde sunt
-              fugiat dolore ipsum id est maxime ad tempore quasi tenetur
-            </p>
-            <br>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-            </div>
-          </div>
-          <div class="col3">
-            <img src="img/profil3.jpg" alt="" />
-            <hr />
-            <h3>Carmen Joe</h3>
-            <p>
-              Lorem ipsum dolor sit, amet consectur adipisicin elit Unde sunt
-              fugiat dolore ipsum id est maxime ad tempore quasi tenetur
-            </p>
-            <br>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-            </div>
-          </div>
+          <?php } ?>
         </div>
       </div>
     </section>
+
+    
+
+    
 
     <!-- Footer Section -->
 

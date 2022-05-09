@@ -98,8 +98,6 @@ $sql2->execute();
               <th>Country</th>
               <th>Birthdate</th>
               <th>Registration Date</th>
-              <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -121,12 +119,6 @@ $sql2->execute();
                 <td><?php echo $user['Country'] ?></td>
                 <td><?php echo $user['BirthDate'] ?></td>
                 <td><?php echo $user['RegDate'] ?></td>
-                <td class="but">
-                  <a href="editCustomer.php"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Edit</button></a>
-                </td>
-                <td>
-                  <a href="editCustomer.php"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Delete</button></a>
-                </td>
               </tr>
 
 

@@ -103,7 +103,7 @@ $sql2->execute();
 
             ?>
               <tr>
-                <td><img src="<?php echo $car['Image'] ?>" alt=""></td>
+                <td><img src="img/<?php echo $car['CarImage']?>" alt=""></td>
                 <td><?php echo $car['IdCar'] ?></td>
                 <td><?php echo $car['CarName'] ?></td>
                 <td><?php echo $car['ModelYear'] ?></td>
@@ -113,13 +113,12 @@ $sql2->execute();
                 <td><?php echo $car['FuelType'] ?></td>
                 <td><?php echo $car['PricePerDay'] ?></td>
                 <td class="but">
-                  <a href="adminUpdateCar.php?kullanici_id=<?php echo $car['IdCar']; ?>"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Edit</button></a>
+                  <a href="adminUpdateCar.php?IdCar=<?php echo $car['IdCar']; ?>"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Edit</button></a>
                 </td>
                 <td>
-                  <a href="editCustomer.php"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Delete</button></a>
+                  <a href="connection/process2.php?IdCar=<?php echo $car['IdCar']; ?>&carDelete=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Delete</button></a>
                 </td>
               </tr>
-
             <?php } ?>
 
           </tbody>
@@ -142,7 +141,7 @@ $sql2->execute();
 
       <div class="sales-analytics">
         <div class="item add-product">
-          <a href="">
+          <a href="adminAddToCar.php">
             <div>
               <span class="material-icons-sharp">add</span>
               <h3>Add Car</h3>

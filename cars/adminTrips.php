@@ -14,8 +14,13 @@ if ($admin['Role'] == 0) {
   exit;
 }
 
-$sql2 = $db->prepare("SELECT IdBooking, u.IdUser, Name, LastName, c.IdCar, CarName, ModelYear, FromDate, ToDate, PickUpLocation, datediff(ToDate, FromDate)*c.PricePerDay as Price, Message, Rate, Status  
-FROM booking b INNER JOIN cars c ON b.IdCar = c.IdCar INNER JOIN users u ON u.IdUser = b.IdUser INNER JOIN review r ON r.IdReview = b.IdReview");
+$sql2 = $db->prepare("SELECT IdBooking, u.IdUser, Name, LastName, c.IdCar, CarName, ModelYear, FromDate, ToDate, PickUpLocation, datediff(ToDate, FromDate)*c.PricePerDay as Price, Message, BookRate, CarStatus, BookStatus
+FROM booking b INNER JOIN cars c 
+ON b.IdCar = c.IdCar 
+INNER JOIN users u 
+ON u.IdUser = b.IdUser 
+INNER JOIN review r 
+ON r.IdReview = b.IdReview");
 $sql2->execute();
 
 ?>
@@ -120,8 +125,8 @@ $sql2->execute();
                 <td><?php echo $book['PickUpLocation'] ?></td>
                 <td><?php echo $book['Price'] ?></td>
                 <td><?php echo $book['Message'] ?></td>
-                <td><?php echo $book['Rate'] ?></td>
-                <td><?php echo $book['Status'] ?></td>
+                <td><?php echo $book['BookRate'] ?></td>
+                <td><?php echo $book['BookStatus'] ?></td>
               </tr>
 
             <?php } ?>

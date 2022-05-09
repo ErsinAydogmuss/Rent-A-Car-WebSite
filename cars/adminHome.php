@@ -23,8 +23,13 @@ $sql3->execute();
 $sql4 = $db->prepare("SELECT count(IdUser) AS CountUser FROM users WHERE Role = 0");
 $sql4->execute();
 
-$sql5 = $db->prepare("SELECT IdBooking, u.IdUser, Name, LastName, c.IdCar, CarName, ModelYear, FromDate, ToDate, PickUpLocation, datediff(ToDate, FromDate)*c.PricePerDay as Price, Message, Rate, Status  
-FROM booking b INNER JOIN cars c ON b.IdCar = c.IdCar INNER JOIN users u ON u.IdUser = b.IdUser INNER JOIN review r ON r.IdReview = b.IdReview");
+$sql5 = $db->prepare("SELECT IdBooking, u.IdUser, Name, LastName, c.IdCar, CarName, ModelYear, FromDate, ToDate, PickUpLocation, datediff(ToDate, FromDate)*c.PricePerDay as Price, Message, BookRate, CarStatus, BookStatus
+FROM booking b INNER JOIN cars c 
+ON b.IdCar = c.IdCar 
+INNER JOIN users u 
+ON u.IdUser = b.IdUser 
+INNER JOIN review r 
+ON r.IdReview = b.IdReview");
 $sql5->execute();
 
 $sql6 = $db->prepare("SELECT * FROM booking b INNER JOIN users u ON b.IdUser = u.IdUser INNER JOIN review r ON b.IdReview = r.IdReview");
@@ -33,7 +38,7 @@ $sql6->execute();
 $sql7 = $db->prepare("SELECT count(IdUser) as CountAdmin FROM Users WHERE Role = 1");
 $sql7->execute();
 
-$sql8 = $db->prepare("SELECT AVG(Rate) as Rate FROM Cars");
+$sql8 = $db->prepare("SELECT AVG(CarRate) as Rate FROM Cars");
 $sql8->execute();
 
 
@@ -182,7 +187,7 @@ $sql8->execute();
               <th>To Date</th>
               <th>Pick Up Location</th>
               <th>Price</th>
-              <th>Rate</th>
+              <th>Book Rate</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -203,8 +208,8 @@ $sql8->execute();
                   <td><?php echo $book['ToDate'] ?></td>
                   <td><?php echo $book['PickUpLocation'] ?></td>
                   <td><?php echo $book['Price'] ?></td>
-                  <td><?php echo $book['Rate'] ?></td>
-                  <td><?php echo $book['Status'] ?></td>
+                  <td><?php echo $book['BookRate'] ?></td>
+                  <td><?php echo $book['BookStatus'] ?></td>
                 </tr>
             <?php }
             } ?>

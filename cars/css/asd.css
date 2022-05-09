@@ -146,6 +146,9 @@ form .buttons{
 form .buttons button , .backBtn{
     margin-right: 14px;
 }
+.images{
+    border-radius: 15px;
+}
 
 @media (max-width: 750px) {
     .container form{

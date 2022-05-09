@@ -14,12 +14,6 @@ if ($admin['Role'] == 0) {
     exit;
 }
 
-$sql2 = $db->prepare("SELECT * FROM cars WHERE IdCar=:id");
-$sql2->execute(array(
-    'id' => $_GET['IdCar']
-));
-
-$theCar = $sql2->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -30,7 +24,7 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Cars Page</title>
+    <title>Admin Add Car</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
     <link rel="stylesheet" href="./css/admin.css" />
     <link rel="stylesheet" href="./css/asd.css" />
@@ -82,66 +76,60 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
         </aside>
 
         <main>
-            <header>Update Car Information</header>
+            <header>Add Car Information</header>
 
-            <form action="connection/process2.php?IdCar=<?php echo $theCar['IdCar']; ?>" method="POST">
+            <form action="connection/process3.php" method="POST" enctype="multipart/form-data">
                 <div class="details personal">
-
-                    <img src="<?php echo $theCar['CarImage'] ?>" alt="">
 
                     <div class="fields">
                         <div class="input-field">
+                            <label>Car Image</label>
+                            <input type="file" name="fileImage" style="border:none" >
+                        </div>
+
+                        <div class="input-field">
                             <label>Car Name</label>
-                            <input type="text" name="carName" value="<?php echo $theCar['CarName'] ?>" disabled>
+                            <input type="text" name="carName">
                         </div>
 
                         <div class="input-field">
                             <label>Model Year</label>
-                            <input type="text" name="modelYear" value="<?php echo $theCar['ModelYear'] ?>" disabled>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Creation Date</label>
-                            <input type="text" name="creationDate" value="<?php echo $theCar['CreationDate'] ?>" disabled>
+                            <input type="text" name="modelYear">
                         </div>
 
                         <div class="input-field">
                             <label>Transmission</label>
-                            <input type="text" name="transmission" value="<?php echo $theCar['Transmission'] ?>" disabled>
+                            <input type="text" name="transmission">
                         </div>
 
                         <div class="input-field">
                             <label>Seating Capacity</label>
-                            <input type="text" name="seatingCapacity" value="<?php echo $theCar['SeatingCapacity'] ?>" disabled>
+                            <input type="text" name="seatingCapacity">
                         </div>
 
                         <div class="input-field">
                             <label>Fuel Type</label>
-                            <input type="text" name="fuelType" value="<?php echo $theCar['FuelType'] ?>" disabled>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Rate</label>
-                            <input type="text" name="rate" value="<?php echo $theCar['CarRate'] ?>" disabled>
+                            <input type="text" name="fuelType">
                         </div>
 
                         <div class="input-field">
                             <label>Price Per Day</label>
-                            <input name="xPrice" type="text" value="<?php echo $theCar['PricePerDay'] ?>" required>
+                            <input name="xPrice" type="text" required>
                         </div>
 
                         <div class="input-field">
                             <label>Status</label>
                             <select name="xStatus" required>
                                 <option disabled selected>Availability Status</option>
-                                <option value="1" <?php echo $theCar['CarStatus'] == '1' ? 'selected=""' : '' ?>>Active</option>
-                                <option value="0" <?php echo $theCar['CarStatus'] == '0' ? 'selected=""' : '' ?>>Passive</option>
+                                <option value="1">Active</option>
+                                <option value="0">Passive</option>
                             </select>
                         </div>
+                        
                     </div>
                 </div>
-                <button class="nextBtn" type='submit' name='editButton' onclick="alert()">
-                    Update
+                <button class="nextBtn" type='submit' name='addToCar' onclick="alert()">
+                    Add Car
                 </button>
             </form>
         </main>
