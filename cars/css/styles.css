@@ -184,6 +184,7 @@ body{
 
 .wrapper .form .inputfield .btn:hover{
   background: #b87333;
+  color: #fff;
 }
 
 .wrapper .form .inputfield:last-child{

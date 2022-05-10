@@ -41,13 +41,12 @@
             <li><a href="#" id="login-btn">Login</a></li>
           </ul>
         </div>
-        <form action="islem.php" class="login-form">
+        <form action="connection/process4.php" class="login-form">
           <h3>Login</h3>
-          <input type="email" placeholder="Your Email..." class="box" />
-          <input type="password" placeholder="Your Password..." class="box" />
-          <p>Forget your password? <a href="#">Click Here</a></p>
+          <input type="email" name="email" placeholder="Your Email..." class="box" />
+          <input type="password" name="password" placeholder="Your Password..." class="box" />
           <p>Don't have an account <a href="signUp.php">Create Now</a></p>
-          <input type="submit" value="Login Now" class="btnLgn" />
+          <input type="submit" value="Login Now" class="btnLgn" name="login" />
         </form>
       </div>
     </header>
