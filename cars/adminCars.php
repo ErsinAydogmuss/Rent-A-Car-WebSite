@@ -14,7 +14,11 @@ if ($admin['Role'] == 0) {
   exit;
 }
 
-$sql2 = $db->prepare("SELECT * FROM cars");
+$sql2 = $db->prepare("SELECT * FROM cars c, transmission t, fueltype ft, branch b, status s WHERE
+c.IdTransmission = t.IdTransmission AND
+c.IdFuelType = ft.IdFuelType AND
+c.IdBranch = b.IdBranch AND
+c.IdStatus = s.IdStatus");
 $sql2->execute();
 
 ?>
@@ -53,6 +57,10 @@ $sql2->execute();
           <span class="material-icons-sharp">receipt_long</span>
           <h3>Trips</h3>
         </a>
+        <a href="adminBranch.php">
+          <span class="material-icons-sharp"> account_balance </span>
+          <h3>Branch</h3>
+        </a>
         <a href="adminCars.php">
           <span class="material-icons-sharp"> time_to_leave </span>
           <h3>Cars</h3>
@@ -60,14 +68,6 @@ $sql2->execute();
         <a href="adminMessages.php">
           <span class="material-icons-sharp">mail_outline</span>
           <h3>Messages</h3>
-        </a>
-        <a href="#">
-          <span class="material-icons-sharp">report_gmailerrorred</span>
-          <h3>Reports</h3>
-        </a>
-        <a href="#">
-          <span class="material-icons-sharp">settings</span>
-          <h3>Settings</h3>
         </a>
         <a href="index.php">
           <span class="material-icons-sharp">logout</span>
@@ -83,14 +83,16 @@ $sql2->execute();
           <thead>
             <tr>
               <th>Image</th>
-              <th>Car Id</th>
+              <th>Branch Name</th>
               <th>Car Name</th>
               <th>Model Year</th>
               <th>Creation Date</th>
               <th>Updation Date</th>
               <th>Seating Capacity</th>
+              <th>Transmission</th>
               <th>Fuel Type</th>
               <th>Price</th>
+              <th>Status</th>
               <th></th>
               <th></th>
             </tr>
@@ -104,14 +106,16 @@ $sql2->execute();
             ?>
               <tr>
                 <td><img src="img/<?php echo $car['CarImage']?>" alt=""></td>
-                <td><?php echo $car['IdCar'] ?></td>
+                <td><?php echo $car['BranchName'] ?></td>
                 <td><?php echo $car['CarName'] ?></td>
                 <td><?php echo $car['ModelYear'] ?></td>
                 <td><?php echo $car['CreationDate'] ?></td>
                 <td><?php echo $car['UpdationDate'] ?></td>
                 <td><?php echo $car['SeatingCapacity'] ?></td>
+                <td><?php echo $car['Transmission'] ?></td>
                 <td><?php echo $car['FuelType'] ?></td>
                 <td><?php echo $car['PricePerDay'] ?></td>
+                <td><?php echo $car['Status'] ?></td>
                 <td class="but">
                   <a href="adminUpdateCar.php?IdCar=<?php echo $car['IdCar']; ?>"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Edit</button></a>
                 </td>

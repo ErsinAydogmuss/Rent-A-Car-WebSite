@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <header>
+<header>
     <div class="container">
       <div class="logo">
         <a href="index.php">
@@ -29,15 +29,32 @@
           <li><a href="book.php">Book</a></li>
           <li><a href="cars.php">Cars</a></li>
           <li><a href="contact.php">Contact</a></li>
-          <li><a href="#" id="login-btn">Login</a></li>
+          <?php
+          if(isset($_SESSION['email'])){?>
+            <a href="myAccount.php">
+            <span class="material-icons-sharp logosa">person</span>
+            </a>
+          <?php } else {?>
+            <li><a href="#" id="login-btn">Login</a></li>
+            <?php }?>
+            
+        
         </ul>
       </div>
-      <form action="index.php" class="login-form" method="POST">
+      <form action="connection/process4.php" class="login-form" method="POST">
         <h3>Login</h3>
-        <input type="email" name="logEmail" placeholder="Your Email..." class="box" />
-        <input type="password" name="logPassword" placeholder="Your Password..." class="box" />
+        <?php
+        if (isset($_GET['status'])) {
+          if ($_GET['status'] == "error") { ?>
+            <div class="alert alert-danger">
+              <strong>Error!</strong> Login failed...
+            </div>
+        <?php }
+        } ?>
+        <input type="email" name="email" placeholder="Your Email..." class="box" />
+        <input type="password" name="password" placeholder="Your Password..." class="box" />
         <p>Don't have an account <a href="signUp.php">Create Now</a></p>
-        <input type="submit" value="Login Now" class="btnLgn" />
+        <input type="submit" value="Login Now" class="btnLgn" name="login" />
       </form>
     </div>
   </header>
@@ -64,8 +81,30 @@
         <div class="title">
           Registration Form
         </div>
+
+
+        <?php 
+          if (isset($_GET['status']) AND $_GET['status']=="dontMatch") {?>
+          <div class="alert alert-danger">
+					  <strong>Error!</strong> The passwords you entered do not match.
+				  </div>
+				<?php } elseif (isset($_GET['status']) AND $_GET['status']=="shortPassword") {?>
+          <div class="alert alert-danger">
+					  <strong>Error!</strong> Your password must be at least 6 characters long.
+				  </div>
+				<?php } elseif (isset($_GET['status']) AND $_GET['status']=="duplicate") {?>
+          <div class="alert alert-danger">
+					  <strong>Error!</strong> This user has already been registered.
+				  </div>
+				<?php } elseif (isset($_GET['status']) AND $_GET['status']=="failed") {?>
+          <div class="alert alert-danger">
+					  <strong>Error!</strong> Registration Failed Consult the System Administrator.
+				  </div>
+        <?php } ?>
+ 
+
         <div class="form">
-          <form action="connection/process4.php" method="POST">
+          <form action="connection/process5.php" method="POST">
             <div class="inputfield">
               <label>First Name</label>
               <input type="text" name="fName" class="input">
@@ -106,7 +145,7 @@
             </div>
             <div class="inputfield terms">
               <label class="check">
-                <input type="checkbox">
+                <input type="checkbox" required>
                 <span class="checkmark"></span>
               </label>
               <p>Agreed to terms and conditions</p>

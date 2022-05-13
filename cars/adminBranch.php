@@ -14,11 +14,7 @@ if ($admin['Role'] == 0) {
   exit;
 }
 
-$sql2 = $db->prepare("SELECT * FROM booking b, users u, cars c, branch br, status s WHERE 
-b.IdUser = u.IdUser AND 
-b.IdCar = c.IdCar AND
-b.IdBranch = br.IdBranch AND
-b.IdStatus = s.IdStatus");
+$sql2 = $db->prepare("SELECT * FROM branch");
 $sql2->execute();
 
 ?>
@@ -30,7 +26,7 @@ $sql2->execute();
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Trips Page</title>
+  <title>Admin Branch Page</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
   <link rel="stylesheet" href="./css/admin.css" />
 </head>
@@ -77,23 +73,12 @@ $sql2->execute();
     </aside>
 
     <main>
-      <h1>Trips</h1>
+      <h1>Cars</h1>
       <div class="insights cust">
         <table>
           <thead>
             <tr>
-              <th>Book Id</th>
-              <th>Customer Id</th>
-              <th>Customer Name</th>
-              <th>Customer Surname</th>
-              <th>Car Id</th>
-              <th>Car Name</th>
-              <th>Car Model Year</th>
-              <th>From Date</th>
-              <th>To Date</th>
-              <th>Branch</th>
-              <th>Price</th>
-              <th>Status</th>
+              <th>Branch Name</th>
               <th></th>
             </tr>
           </thead>
@@ -101,28 +86,15 @@ $sql2->execute();
 
             <?php
 
-            while ($book = $sql2->fetch(PDO::FETCH_ASSOC)) {
+            while ($branch = $sql2->fetch(PDO::FETCH_ASSOC)) {
 
             ?>
-
               <tr>
-                <td><?php echo $book['IdBooking'] ?></td>
-                <td><?php echo $book['IdUser'] ?></td>
-                <td><?php echo $book['Name'] ?></td>
-                <td><?php echo $book['LastName'] ?></td>
-                <td><?php echo $book['IdCar'] ?></td>
-                <td><?php echo $book['CarName'] ?></td>
-                <td><?php echo $book['ModelYear'] ?></td>
-                <td><?php echo $book['FromDate'] ?></td>
-                <td><?php echo $book['ToDate'] ?></td>
-                <td><?php echo $book['BranchName'] ?></td>
-                <td><?php echo $book['Price'] ?></td>
-                <td><?php echo $book['Status'] ?></td>
-                <td class="but">
-                  <a href="connection/process13.php?IdBooking=<?php echo $book['IdBooking']; ?>"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Finish Rental</button></a>
+                <td><?php echo $branch['BranchName'] ?></td>
+                <td>
+                  <a href="connection/process12.php?IdBranch=<?php echo $branch['IdBranch']; ?>&branchDelete=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Delete</button></a>
                 </td>
               </tr>
-
             <?php } ?>
 
           </tbody>
@@ -140,6 +112,17 @@ $sql2->execute();
             <p>Hey, <b><?php echo $admin['Name'] ?></b></p>
             <small class="text-muted">Admin</small>
           </div>
+        </div>
+      </div>
+
+      <div class="sales-analytics">
+        <div class="item add-product">
+          <a href="adminAddToBranch.php">
+            <div>
+              <span class="material-icons-sharp">add</span>
+              <h3>Add Branch</h3>
+            </div>
+          </a>
         </div>
       </div>
     </div>

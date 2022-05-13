@@ -52,6 +52,10 @@ if ($admin['Role'] == 0) {
                     <span class="material-icons-sharp">receipt_long</span>
                     <h3>Trips</h3>
                 </a>
+                <a href="adminBranch.php">
+                    <span class="material-icons-sharp"> account_balance </span>
+                    <h3>Branch</h3>
+                </a>
                 <a href="adminCars.php">
                     <span class="material-icons-sharp"> time_to_leave </span>
                     <h3>Cars</h3>
@@ -59,14 +63,6 @@ if ($admin['Role'] == 0) {
                 <a href="adminMessages.php">
                     <span class="material-icons-sharp">mail_outline</span>
                     <h3>Messages</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">report_gmailerrorred</span>
-                    <h3>Reports</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">settings</span>
-                    <h3>Settings</h3>
                 </a>
                 <a href="index.php">
                     <span class="material-icons-sharp">logout</span>
@@ -77,44 +73,93 @@ if ($admin['Role'] == 0) {
 
         <main>
             <header>Add Car Information</header>
-
+            <?php
+            $sqlTrans = $db->prepare("SELECT * FROM transmission");
+            $sqlTrans->execute();
+            ?>
             <form action="connection/process3.php" method="POST" enctype="multipart/form-data">
                 <div class="details personal">
 
                     <div class="fields">
                         <div class="input-field">
                             <label>Car Image</label>
-                            <input type="file" name="fileImage" style="border:none" >
+                            <input type="file" name="fileImage" style="border:none">
                         </div>
 
                         <div class="input-field">
                             <label>Car Name</label>
-                            <input type="text" name="carName">
+                            <input type="text" name="carName" placeholder="Enter the Car Name">
                         </div>
 
                         <div class="input-field">
                             <label>Model Year</label>
-                            <input type="text" name="modelYear">
+                            <select name="modelYear">
+                                <option selected disabled>Select Model Year</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                                <option value="2012">2012</option>
+                                <option value="2011">2011</option>
+                                <option value="2010">2010</option>
+                            </select>
                         </div>
 
                         <div class="input-field">
                             <label>Transmission</label>
-                            <input type="text" name="transmission">
+                            <select name="transmission">
+                                <option disabled selected>Select Transmission</option>
+                                <?php while ($trans = $sqlTrans->fetch(PDO::FETCH_ASSOC)) { ?>
+                                    <option value="<?php echo $trans['IdTransmission'] ?>"><?php echo $trans['Transmission'] ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
 
                         <div class="input-field">
                             <label>Seating Capacity</label>
-                            <input type="text" name="seatingCapacity">
+                            <select name="seatingCapacity">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                            </select>
                         </div>
-
+                        <?php
+                        $sqlFuel = $db->prepare("SELECT * FROM fuelType");
+                        $sqlFuel->execute();
+                        ?>
                         <div class="input-field">
                             <label>Fuel Type</label>
-                            <input type="text" name="fuelType">
+                            <select name="fuelType">
+                                <option selected disabled>Select Fuel Type</option>
+                                <?php while ($fuel = $sqlFuel->fetch(PDO::FETCH_ASSOC)) { ?>
+                                    <option value="<?php echo $fuel['IdFuelType'] ?>"><?php echo $fuel['FuelType'] ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
 
                         <div class="input-field">
                             <label>Price Per Day</label>
                             <input name="xPrice" type="text" required>
+                        </div>
+                        <?php
+                        $sqlBranch = $db->prepare("SELECT * FROM branch");
+                        $sqlBranch->execute();
+                        ?>
+                        <div class="input-field">
+                            <label>Branch Name</label>
+                            <select name="branch" class="branch">
+                                <?php while ($branch = $sqlBranch->fetch(PDO::FETCH_ASSOC)) { ?>
+                                    <option value="<?php echo $branch['IdBranch'] ?>"><?php echo $branch['BranchName'] ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
 
                         <div class="input-field">
@@ -125,7 +170,7 @@ if ($admin['Role'] == 0) {
                                 <option value="0">Passive</option>
                             </select>
                         </div>
-                        
+
                     </div>
                 </div>
                 <button class="nextBtn" type='submit' name='addToCar' onclick="alert()">

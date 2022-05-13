@@ -2,21 +2,8 @@
 include 'connection/config2.php';
 ob_start();
 session_start();
-if(isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
-}
-
-
-
-
-$sql2 = $db->prepare("SELECT * FROM cars c, transmission t, fueltype ft, status s WHERE 
-c.IdTransmission = t.IdTransmission AND
-c.IdFuelType = ft.IdFuelType and
-c.IdStatus = s.IdStatus");
-$sql2->execute();
-
+$email = $_SESSION['email'];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +14,7 @@ $sql2->execute();
     <meta name="Author" content="Ersin Aydogmus">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cars Page</title>
+    <title>My Account Page</title>
 
     <script src="https://kit.fontawesome.com/31a68f4fa9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
@@ -81,69 +68,19 @@ $sql2->execute();
 
     <!-- Main Section -->
 
-    <section id="carsSlider" class="slider">
-        <div id="carsCaption" class="caption">
-            <h1>CARS</h1>
-            <p>Cheapest prices and High performance</p>
+    <section id="contactSlider" class="slider">
+        <div id="contactCaption" class="caption">
+            <h1>My Account</h1>
         </div>
     </section>
 
-    <!-- Inspect Section -->
+    <!-- Form Section -->
 
-    <section id="inspect" class="sectionArea">
-        <div class="inspectTop">
-            <h2 class="sectionHeader">Inspect Cars</h2>
-        </div>
-        <div class="inspectBody">
-            <?php
-            while ($car = $sql2->fetch(PDO::FETCH_ASSOC)) {
-            ?>
-
-                <div class="container">
-                    <?php if ($car) { 
-                        if($car['IdStatus'] == 1) {?>
-                        <div class="col2" id="cont">
-                            <div class="inspectImage">
-                                <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
-                            </div>
-                            <div class="inspectText">
-                                <p class="date"><?php echo $car['ModelYear'] ?></p>
-                                <h4><?php echo $car['CarName'] ?></h4>
-                                <p>
-                                    <?php echo $car['SeatingCapacity'] ?>Seats <br>
-                                    <?php echo $car['Transmission'] ?> <br>
-                                    <?php echo $car['FuelType'] ?> <br>
-
-                                </p>
-                                <h4><?php echo $car['PricePerDay'] ?> $ </h4>
-                            </div>
-                        </div>
-
-                    <?php } }
-                    $car = $sql2->fetch(PDO::FETCH_ASSOC);
-                    if ($car) {
-                        if($car['IdStatus'] = 1) {
-
-                    ?>
-                        <div class="col2" id="cont">
-                            <div class="inspectImage">
-                                <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
-                            </div>
-                            <div class="inspectText">
-                                <p class="date"><?php echo $car['ModelYear'] ?></p>
-                                <h4><?php echo $car['CarName'] ?></h4>
-                                <p>
-                                    <?php echo $car['SeatingCapacity'] ?> <br>
-                                    <?php echo $car['Transmission'] ?> Seats <br>
-                                </p>
-                                <h4><?php echo $car['PricePerDay'] ?> $ </h4>
-                            </div>
-                        </div>
-                    <?php } }?>
-                </div>
-
-            <?php } ?>
-
+    <section id="contact" class="sectionArea">
+        <div class="contactBody">
+            <div class="container">
+                <div class=""></div>
+            </div>
         </div>
     </section>
 

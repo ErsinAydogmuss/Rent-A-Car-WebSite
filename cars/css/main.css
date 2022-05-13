@@ -14,6 +14,22 @@ h1 {
   letter-spacing: 4px;
   margin-bottom: 20px;
 }
+
+.logosa {
+  font-size: 35px;
+  margin: 15px;
+  color: #b68e64;
+}
+
+.branch{
+  width: 200px;
+  height: 35px;
+  border-radius: 15px;
+  font-family: "Ralewey";
+  font-size: 20px;
+}
+
+
 .sectionHeader {
   background: #b68e64;
   height: 60px;
@@ -658,7 +674,7 @@ h4 {
   background: #b68e64;
   border: none;
   padding: 15.5px;
-  width: 92%;
+  width: 50%;
   display: block;
   font-size: 14px;
   border-radius: 15px;
@@ -666,6 +682,11 @@ h4 {
 
 .formField:hover {
   background-color: #b87333;
+}
+
+#kalin{
+  font-size: 50px;
+  text-align: center;
 }
 
 .formBtn {
@@ -691,6 +712,7 @@ h4 {
   background: url(../img/car8.jpg) center center no-repeat;
   background-size: cover;
 }
+
 
 #bookCaption {
   height: 250px;

@@ -23,24 +23,20 @@ $sql3->execute();
 $sql4 = $db->prepare("SELECT count(IdUser) AS CountUser FROM users WHERE Role = 0");
 $sql4->execute();
 
-$sql5 = $db->prepare("SELECT IdBooking, u.IdUser, Name, LastName, c.IdCar, CarName, ModelYear, FromDate, ToDate, PickUpLocation, datediff(ToDate, FromDate)*c.PricePerDay as Price, Message, BookRate, CarStatus, BookStatus
-FROM booking b INNER JOIN cars c 
-ON b.IdCar = c.IdCar 
-INNER JOIN users u 
-ON u.IdUser = b.IdUser 
-INNER JOIN review r 
-ON r.IdReview = b.IdReview");
+$sql5 = $db->prepare("SELECT * FROM booking b, users u, cars c, branch br, status s WHERE 
+b.IdUser = u.IdUser AND 
+b.IdCar = c.IdCar AND
+b.IdBranch = br.IdBranch AND
+b.IdStatus = s.IdStatus");
 $sql5->execute();
 
-$sql6 = $db->prepare("SELECT * FROM booking b INNER JOIN users u ON b.IdUser = u.IdUser INNER JOIN review r ON b.IdReview = r.IdReview");
+$sql6 = $db->prepare("SELECT * FROM booking b, users u, review r WHERE
+b.IdUser = u.IdUser AND
+b.IdReview = r.IdReview");
 $sql6->execute();
 
 $sql7 = $db->prepare("SELECT count(IdUser) as CountAdmin FROM Users WHERE Role = 1");
 $sql7->execute();
-
-$sql8 = $db->prepare("SELECT AVG(CarRate) as Rate FROM Cars");
-$sql8->execute();
-
 
 ?>
 <!DOCTYPE html>
@@ -77,6 +73,10 @@ $sql8->execute();
           <span class="material-icons-sharp">receipt_long</span>
           <h3>Trips</h3>
         </a>
+        <a href="adminBranch.php">
+          <span class="material-icons-sharp"> account_balance </span>
+          <h3>Branch</h3>
+        </a>
         <a href="adminCars.php">
           <span class="material-icons-sharp"> time_to_leave </span>
           <h3>Cars</h3>
@@ -84,14 +84,6 @@ $sql8->execute();
         <a href="adminMessages.php">
           <span class="material-icons-sharp">mail_outline</span>
           <h3>Messages</h3>
-        </a>
-        <a href="#">
-          <span class="material-icons-sharp">report_gmailerrorred</span>
-          <h3>Reports</h3>
-        </a>
-        <a href="#">
-          <span class="material-icons-sharp">settings</span>
-          <h3>Settings</h3>
         </a>
         <a href="Connection/logout.php">
           <span class="material-icons-sharp">logout</span>
@@ -107,7 +99,6 @@ $sql8->execute();
       $totalCar = $sql3->fetch(PDO::FETCH_ASSOC);
       $totalUser = $sql4->fetch(PDO::FETCH_ASSOC);
       $totalAdmin = $sql7->fetch(PDO::FETCH_ASSOC);
-      $AvgRate = $sql8->fetch(PDO::FETCH_ASSOC);
       ?>
 
       <div class="insights">
@@ -157,15 +148,6 @@ $sql8->execute();
             </div>
           </div>
         </div>
-        <div class="sales">
-          <span class="material-icons-sharp">star</span>
-          <div class="middle">
-            <div class="left">
-              <h3>Car Average Rating</h3>
-              <h1><?php echo $AvgRate['Rate'] ?></h1>
-            </div>
-          </div>
-        </div>
       </div>
 
 
@@ -181,13 +163,13 @@ $sql8->execute();
               <th>Book Id</th>
               <th>Customer Name</th>
               <th>Customer Surname</th>
+              <th>Phone Number</th>
               <th>Car Name</th>
               <th>Car Model Year</th>
               <th>From Date</th>
               <th>To Date</th>
-              <th>Pick Up Location</th>
+              <th>Branch</th>
               <th>Price</th>
-              <th>Book Rate</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -202,14 +184,14 @@ $sql8->execute();
                   <td><?php echo $book['IdBooking'] ?></td>
                   <td><?php echo $book['Name'] ?></td>
                   <td><?php echo $book['LastName'] ?></td>
+                  <td><?php echo $book['PhoneNumber'] ?></td>
                   <td><?php echo $book['CarName'] ?></td>
                   <td><?php echo $book['ModelYear'] ?></td>
                   <td><?php echo $book['FromDate'] ?></td>
                   <td><?php echo $book['ToDate'] ?></td>
-                  <td><?php echo $book['PickUpLocation'] ?></td>
+                  <td><?php echo $book['BranchName'] ?></td>
                   <td><?php echo $book['Price'] ?></td>
-                  <td><?php echo $book['BookRate'] ?></td>
-                  <td><?php echo $book['BookStatus'] ?></td>
+                  <td><?php echo $book['Status'] ?></td>
                 </tr>
             <?php }
             } ?>

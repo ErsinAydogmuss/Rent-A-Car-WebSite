@@ -1,5 +1,14 @@
+<?php
+include 'connection/config2.php';
+ob_start();
+session_start();
+if(isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,36 +19,54 @@
     <title>Book Page</title>
 
     <script src="https://kit.fontawesome.com/31a68f4fa9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
 </head>
+
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.php">
-                    <img src="img/carIcon.jpg" alt="carIcon">
-                </a>
+<header>
+    <div class="container">
+      <div class="logo">
+        <a href="index.php">
+          <img src="img/carIcon.jpg" alt="carIcon" />
+        </a>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="book.php">Book</a></li>
+          <li><a href="cars.php">Cars</a></li>
+          <li><a href="contact.php">Contact</a></li>
+          <?php
+          if(isset($_SESSION['email'])){?>
+            <a href="myAccount.php">
+            <span class="material-icons-sharp logosa">person</span>
+            </a>
+          <?php } else {?>
+            <li><a href="#" id="login-btn">Login</a></li>
+            <?php }?>
+            
+        
+        </ul>
+      </div>
+      <form action="connection/process4.php" class="login-form" method="POST">
+        <h3>Login</h3>
+        <?php
+        if (isset($_GET['status'])) {
+          if ($_GET['status'] == "error") { ?>
+            <div class="alert alert-danger">
+              <strong>Error!</strong> Login failed...
             </div>
-            <div class="menu">
-                <ul>
-                    <li><a href="book.php">Book</a></li>
-                    <li><a href="cars.php">Cars</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                    <li><a href="#" id="login-btn">Login</a></li>
-                </ul>
-            </div>
-            <form action="" class="login-form">
-                <h3>Login</h3>
-                <input type="email" placeholder="Your Email..." class="box">
-                <input type="password" placeholder="Your Password..." class="box">
-                <p>Forget your password? <a href="#">Click Here</a></p>
-                <p>Don't have an account <a href="signUp.php">Create Now</a></p>
-                <input type="submit" value="Login Now" class="btnLgn">
-            </form>
-        </div>
-    </header>
+        <?php }
+        } ?>
+        <input type="email" name="email" placeholder="Your Email..." class="box" />
+        <input type="password" name="password" placeholder="Your Password..." class="box" />
+        <p>Don't have an account <a href="signUp.php">Create Now</a></p>
+        <input type="submit" value="Login Now" class="btnLgn" name="login" />
+      </form>
+    </div>
+  </header>
 
     <!-- Main Section -->
 
@@ -59,21 +86,29 @@
         <div class="reserveBody">
             <div class="container">
                 <div class="form-container">
-                    <form>
+                    <?php
+                        $sqlBranch = $db->prepare("SELECT * FROM branch");
+                        $sqlBranch->execute();
+                    ?>
+                    <form method="POST" action="connection/process6.php">
                         <div class="input-box">
-                            <input type="search" placeholder="Pick Up Location" required>
+                            <select name="branch" class="branch">
+                                <?php while ($branch = $sqlBranch->fetch(PDO::FETCH_ASSOC)) {?>
+                                <option value="<?php echo $branch['BranchName'] ?>"><?php echo $branch['BranchName'] ?></option>
+                                <?php }?>
+                            </select>
                         </div>
                         <div class="input-box">
-                            <input type="date">
+                            <input type="date" min="<?php echo date("Y-m-d"); ?>" name="fromDate">
                         </div>
                         <div class="input-box">
-                            <input type="date">
+                            <input type="date" min="<?php echo date("Y-m-d"); ?>" name="toDate">
                         </div>
-                        <button type="button" class="btn" onClick="location.href='car.php'">Submit</button>
+                        <button type="submit" class="btn" name="bookBtn">Submit</button>
                     </form>
                 </div>
             </div>
-            
+
         </div>
     </section>
 
@@ -108,8 +143,8 @@
                     <ul class="socialLinks">
                         <li><a href="#"><i class="fa-brands fa-facebook fa" class="fa"></i></a></li>
                         <li><a href="#"><i class="fa-brands fa-twitter fa" class="fa"></i></a></li>
-                        <li><a href="#"><i class="fa-linkedin fa" ></i></a></li>
-                        
+                        <li><a href="#"><i class="fa-linkedin fa"></i></a></li>
+
                     </ul>
                 </div>
             </div>
@@ -117,4 +152,5 @@
     </footer>
     <script src="js/script.js"></script>
 </body>
+
 </html>

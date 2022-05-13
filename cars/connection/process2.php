@@ -26,8 +26,9 @@ $editButton = $_POST['editButton'];
 if (isset($editButton)) {
     $xPrice = $_POST['xPrice'];
     $xStatus = $_POST['xStatus'];
+    $IdBranch = $_POST['branch'];
 
-    $ayarkaydet = $db->prepare("UPDATE cars SET PricePerDay = $xPrice, CarStatus = $xStatus  WHERE (IdCar = $carId);
+    $ayarkaydet = $db->prepare("UPDATE cars SET PricePerDay = $xPrice, IdStatus = $xStatus, IdBranch = $IdBranch   WHERE (IdCar = $carId);
     ");
 
     $update = $ayarkaydet->execute();

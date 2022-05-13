@@ -14,7 +14,7 @@ if ($admin['Role'] == 0) {
   exit;
 }
 
-$sql2 = $db->prepare("SELECT * FROM users");
+$sql2 = $db->prepare("SELECT * FROM users u, gender g WHERE u.IdGender = g.IdGender");
 $sql2->execute();
 
 ?>
@@ -60,6 +60,10 @@ $sql2->execute();
           <span class="material-icons-sharp">receipt_long</span>
           <h3>Trips</h3>
         </a>
+        <a href="adminBranch.php">
+          <span class="material-icons-sharp"> account_balance </span>
+          <h3>Branch</h3>
+        </a>
         <a href="adminCars.php">
           <span class="material-icons-sharp"> time_to_leave </span>
           <h3>Cars</h3>
@@ -67,14 +71,6 @@ $sql2->execute();
         <a href="adminMessages.php">
           <span class="material-icons-sharp">mail_outline</span>
           <h3>Messages</h3>
-        </a>
-        <a href="#">
-          <span class="material-icons-sharp">report_gmailerrorred</span>
-          <h3>Reports</h3>
-        </a>
-        <a href="#">
-          <span class="material-icons-sharp">settings</span>
-          <h3>Settings</h3>
         </a>
         <a href="index.php">
           <span class="material-icons-sharp">logout</span>
@@ -94,10 +90,9 @@ $sql2->execute();
               <th>Gender</th>
               <th>Email</th>
               <th>Phone Number</th>
-              <th>City</th>
-              <th>Country</th>
               <th>Birthdate</th>
               <th>Registration Date</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -115,10 +110,11 @@ $sql2->execute();
                 <td><?php echo $user['Gender'] ?></td>
                 <td><?php echo $user['Email'] ?></td>
                 <td><?php echo $user['PhoneNumber'] ?></td>
-                <td><?php echo $user['City'] ?></td>
-                <td><?php echo $user['Country'] ?></td>
                 <td><?php echo $user['BirthDate'] ?></td>
                 <td><?php echo $user['RegDate'] ?></td>
+                <td>
+                  <a href="connection/process11.php?IdUser=<?php echo $user['IdUser']; ?>&userDelete=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Delete</button></a>
+                </td>
               </tr>
 
 

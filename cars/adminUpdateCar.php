@@ -14,7 +14,12 @@ if ($admin['Role'] == 0) {
     exit;
 }
 
-$sql2 = $db->prepare("SELECT * FROM cars WHERE IdCar=:id");
+$sql2 = $db->prepare("SELECT * FROM cars c, transmission t, fueltype ft, branch b, status s WHERE
+c.IdTransmission = t.IdTransmission AND
+c.IdFuelType = ft.IdFuelType AND
+c.IdBranch = b.IdBranch AND
+c.IdStatus = s.IdStatus AND
+c.IdCar=:id");
 $sql2->execute(array(
     'id' => $_GET['IdCar']
 ));
@@ -58,6 +63,10 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
                     <span class="material-icons-sharp">receipt_long</span>
                     <h3>Trips</h3>
                 </a>
+                <a href="adminBranch.php">
+                    <span class="material-icons-sharp"> account_balance </span>
+                    <h3>Branch</h3>
+                </a>
                 <a href="adminCars.php">
                     <span class="material-icons-sharp"> time_to_leave </span>
                     <h3>Cars</h3>
@@ -65,14 +74,6 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
                 <a href="adminMessages.php">
                     <span class="material-icons-sharp">mail_outline</span>
                     <h3>Messages</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">report_gmailerrorred</span>
-                    <h3>Reports</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">settings</span>
-                    <h3>Settings</h3>
                 </a>
                 <a href="index.php">
                     <span class="material-icons-sharp">logout</span>
@@ -119,11 +120,19 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
                             <label>Fuel Type</label>
                             <input type="text" name="fuelType" value="<?php echo $theCar['FuelType'] ?>" disabled>
                         </div>
-
+                        <?php
+                        $sqlBranch = $db->prepare("SELECT * FROM branch");
+                        $sqlBranch->execute();
+                        ?>
                         <div class="input-field">
-                            <label>Rate</label>
-                            <input type="text" name="rate" value="<?php echo $theCar['CarRate'] ?>" disabled>
+                            <select name="branch" class="branch">
+                                <?php while ($branch = $sqlBranch->fetch(PDO::FETCH_ASSOC)) { ?>
+                                    <option value="<?php echo $branch['IdBranch'] ?>"><?php echo $branch['BranchName'] ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
+
+
 
                         <div class="input-field">
                             <label>Price Per Day</label>
@@ -134,9 +143,10 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
                             <label>Status</label>
                             <select name="xStatus" required>
                                 <option disabled selected>Availability Status</option>
-                                <option value="1" <?php echo $theCar['CarStatus'] == '1' ? 'selected=""' : '' ?>>Active</option>
-                                <option value="0" <?php echo $theCar['CarStatus'] == '0' ? 'selected=""' : '' ?>>Passive</option>
+                                <option value="1" <?php echo $theCar['Status'] == '1' ? 'selected=""' : '' ?>>Active</option>
+                                <option value="0" <?php echo $theCar['Status'] == '0' ? 'selected=""' : '' ?>>Passive</option>
                             </select>
+
                         </div>
                     </div>
                 </div>
@@ -145,11 +155,7 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
                 </button>
             </form>
         </main>
-
-
     </div>
-
-
     <script src="js/script.js"></script>
 </body>
 
