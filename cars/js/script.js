@@ -19,6 +19,9 @@ closeBtn.addEventListener('click', () => {
     sideMenu.style.display = 'none';
 })
 
-function alert(){
-    alert("Update Successful...");
+function checker() {
+    var result = confirm('Are you sure?');
+    if (result == false){
+        event.preventDefault;
+    }
 }

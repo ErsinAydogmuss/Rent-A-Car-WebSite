@@ -9,10 +9,11 @@ if(isset($_SESSION['email'])) {
 
 
 
-$sql2 = $db->prepare("SELECT * FROM cars c, transmission t, fueltype ft, status s WHERE 
+$sql2 = $db->prepare("SELECT * FROM cars c, transmission t, fueltype ft, status s, branch b  WHERE 
 c.IdTransmission = t.IdTransmission AND
 c.IdFuelType = ft.IdFuelType and
-c.IdStatus = s.IdStatus");
+c.IdStatus = s.IdStatus and
+c.IdBranch = b.IdBranch");
 $sql2->execute();
 
 ?>
@@ -109,8 +110,9 @@ $sql2->execute();
                             <div class="inspectText">
                                 <p class="date"><?php echo $car['ModelYear'] ?></p>
                                 <h4><?php echo $car['CarName'] ?></h4>
+                                <h3><?php echo $car['BranchName'] ?></h3>
                                 <p>
-                                    <?php echo $car['SeatingCapacity'] ?>Seats <br>
+                                    <?php echo $car['SeatingCapacity'] ?> Seats <br>
                                     <?php echo $car['Transmission'] ?> <br>
                                     <?php echo $car['FuelType'] ?> <br>
 
@@ -132,9 +134,10 @@ $sql2->execute();
                             <div class="inspectText">
                                 <p class="date"><?php echo $car['ModelYear'] ?></p>
                                 <h4><?php echo $car['CarName'] ?></h4>
+                                <h3><?php echo $car['BranchName'] ?></h3>
                                 <p>
-                                    <?php echo $car['SeatingCapacity'] ?> <br>
-                                    <?php echo $car['Transmission'] ?> Seats <br>
+                                    <?php echo $car['SeatingCapacity'] ?> Seats <br>
+                                    <?php echo $car['Transmission'] ?>  <br>
                                 </p>
                                 <h4><?php echo $car['PricePerDay'] ?> $ </h4>
                             </div>

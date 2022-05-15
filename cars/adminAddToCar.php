@@ -83,7 +83,7 @@ if ($admin['Role'] == 0) {
                     <div class="fields">
                         <div class="input-field">
                             <label>Car Image</label>
-                            <input type="file" name="fileImage" style="border:none">
+                            <input type="file" name="fileImage"  required style="border:none">
                         </div>
 
                         <div class="input-field">
@@ -147,7 +147,7 @@ if ($admin['Role'] == 0) {
 
                         <div class="input-field">
                             <label>Price Per Day</label>
-                            <input name="xPrice" type="text" required>
+                            <input name="xPrice" placeholder="Price" type="text" required>
                         </div>
                         <?php
                         $sqlBranch = $db->prepare("SELECT * FROM branch");
@@ -156,6 +156,7 @@ if ($admin['Role'] == 0) {
                         <div class="input-field">
                             <label>Branch Name</label>
                             <select name="branch" class="branch">
+                                <option selected disabled>Select Branch</option>
                                 <?php while ($branch = $sqlBranch->fetch(PDO::FETCH_ASSOC)) { ?>
                                     <option value="<?php echo $branch['IdBranch'] ?>"><?php echo $branch['BranchName'] ?></option>
                                 <?php } ?>

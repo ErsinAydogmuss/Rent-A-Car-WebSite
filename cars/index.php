@@ -45,15 +45,16 @@ $sql2->execute();
           <li><a href="cars.php">Cars</a></li>
           <li><a href="contact.php">Contact</a></li>
           <?php
-          if(isset($_SESSION['email'])){?>
-            <a href="myAccount.php">
-            <span class="material-icons-sharp logosa">person</span>
-            </a>
-          <?php } else {?>
+          if (isset($_SESSION['email'])) { ?>
+            <li><a href="myAccount.php">
+                <span class="material-icons-sharp logosa">person</span>
+              </a></li>
+
+          <?php } else { ?>
             <li><a href="#" id="login-btn">Login</a></li>
-            <?php }?>
-            
-        
+          <?php } ?>
+
+
         </ul>
       </div>
       <form action="connection/process4.php" class="login-form" method="POST">
@@ -104,24 +105,25 @@ $sql2->execute();
         <?php
         for ($i = 0; $i < 3; $i++) {
           $car = $sql2->fetch(PDO::FETCH_ASSOC);
-          if($car){
+          if ($car) {
         ?>
 
-          <div class="col3">
-            <div class="item">
-              <div class="zoom">
-                <img src="img/<?php echo $car['CarImage'] ?>" alt="" />
-              </div>
-              <div class="itemText">
-                <h3><?php echo $car['CarName'] ?></h3>
-                <p>
-                  <?php echo $car['ModelYear'] ?> Model<br /><?php echo $car['SeatingCapacity'] ?> Capacity<br /><?php echo $car['Transmission'] ?> <br /><?php echo $car['FuelType'] ?><br /><?php echo $car['PricePerDay'] ?> $
-                  $<br />
-                </p>
+            <div class="col3">
+              <div class="item">
+                <div class="zoom">
+                  <img src="img/<?php echo $car['CarImage'] ?>" alt="" />
+                </div>
+                <div class="itemText">
+                  <h3><?php echo $car['CarName'] ?></h3>
+                  <p>
+                    <?php echo $car['ModelYear'] ?> Model<br /><?php echo $car['SeatingCapacity'] ?> Capacity<br /><?php echo $car['Transmission'] ?> <br /><?php echo $car['FuelType'] ?><br /><?php echo $car['PricePerDay'] ?> $
+                    $<br />
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        <?php } } ?>
+        <?php }
+        } ?>
       </div>
     </div>
   </section>

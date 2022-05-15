@@ -17,8 +17,11 @@ h1 {
 
 .logosa {
   font-size: 35px;
-  margin: 15px;
   color: #b68e64;
+}
+
+.logosa:hover {
+  color: #fff;
 }
 
 .branch{
@@ -52,7 +55,7 @@ h3 {
   transition: all 0.5s ease;
 }
 .sectionArea {
-  padding: 80px 0;
+  padding: 100px 0;
 }
 
 /* Grid Settings */
@@ -108,6 +111,7 @@ head .logo img {
 .menu li:hover a {
   background: #b68e64;
   color: #fff;
+
 }
 
 .container .login-form {
@@ -546,6 +550,130 @@ h4 {
   color: #f5f5f5;
 }
 
+main .insights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+main .insights > div {
+  background: white;
+  padding: 1.8rem;
+  border-radius: 2rem;
+  margin-top: 1rem;
+  border: 2px solid #b68e64;
+}
+
+main .insights > div:hover {
+  border: 3px solid #b87333;
+}
+
+.insights table tbody tr td img {
+  width: 200px;
+}
+
+main .insights > div span {
+  background: #b68e64;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: white;
+  font-size: 2rem;
+}
+
+main .insights > div.expenses span {
+  background: #b68e64;
+}
+
+main .insights > div.income span {
+  background: #b68e64;
+}
+
+main .insights > div .middle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main .insights h3 {
+  margin: 1rem 0 0.6rem;
+  font-size: 1rem;
+}
+
+main .insights .progress {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+}
+
+main .insights svg {
+  width: 7rem;
+  height: 7rem;
+}
+
+main .insights svg circle {
+  fill: none;
+  stroke: #b87333;
+  stroke-width: 14;
+  stroke-linecap: round;
+  transform: translate(5px, 5px);
+}
+
+main .insights .sales svg circle {
+  stroke-dashoffset: -30;
+  stroke-dasharray: 200;
+}
+
+main .insights .expenses svg circle {
+  stroke-dashoffset: 20;
+  stroke-dasharray: 80;
+}
+
+main .insights .income svg circle {
+  stroke-dashoffset: 35;
+  stroke-dasharray: 110;
+}
+
+main .insights .progress .number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sales{
+  width: 70%;
+}
+
+main .insights small {
+  margin-top: 1.6rem;
+  display: block;
+}
+
+main .insights .photo {
+  border: none;
+}
+
+main .insights {
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 50px;
+}
+
+main .cust {
+  padding: 15px;
+  border-radius: 15px;
+  display: inline-block;
+}
+
+main .cust table {
+  border-spacing: 30px;
+}
+
 .projectXTop {
   text-align: center;
 }
@@ -664,6 +792,8 @@ h4 {
   margin-bottom: 5px;
   border-radius: 15px;
 }
+
+
 
 .formShape:hover {
   background-color: #b87333;

@@ -14,11 +14,11 @@ if ($admin['Role'] == 0) {
     exit;
 }
 
-$IdBooking = $_GET['IdBooking'];
-$sql2 = $db -> prepare("UPDATE `booking` SET `IdStatus` = '0' WHERE `IdBooking` = '$IdBooking'");
-$sql2 -> execute();
+if($_GET['finishRental'] = "ok"){
+    $IdBooking = $_GET['IdBooking'];
+    $sql2 = $db -> prepare("UPDATE `booking` SET `IdStatus` = '0' WHERE `IdBooking` = '$IdBooking'");
+    $sql2 -> execute();
 
-Header("Location:../adminTrips.php");
-exit;
-
-?>
+    Header("Location:../adminTrips.php");
+    exit;
+}

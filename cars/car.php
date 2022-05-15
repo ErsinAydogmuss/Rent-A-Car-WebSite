@@ -90,29 +90,22 @@ $sql2->execute();
     </div>
 
     <div class="carBody">
-      
-      <?php
-      $sql3 = $db -> prepare("SELECT * FROM booking b WHERE b.FromDate >= '$fromDate' AND b.ToDate <= '$toDate'");
-      $sql3 -> execute();
 
-      $statId = "";
+      <?php
+      $sql3 = $db->prepare("SELECT * FROM booking b WHERE b.FromDate >= '$fromDate' AND b.ToDate <= '$toDate' AND IdStatus = 1");
+      $sql3->execute();
+
+      $str = "";
+            while ($thecar = $sql3->fetch(PDO::FETCH_ASSOC)) {
+              $str .= $thecar['IdCar'] . " ";
+            }
+                
       while ($car = $sql2->fetch(PDO::FETCH_ASSOC)) {
       ?>
         <div class="container">
-//
+          
           <?php if ($car) {
-            $str = "";
-            while($thecar = $sql3->fetch(PDO::FETCH_ASSOC)){
-              $str = "$str";
-              $str += $thecar['IdCar'];
-            }
-            
-            
-             print_r($str);
-//            
-            
-
-            if ($car['IdStatus'] == 1) { ?>
+             if (!str_contains($str, $car['IdCar']) AND $car['IdStatus'] = 1) { ?>
               <div class="col2" id="cont">
                 <div class="carImage">
                   <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
@@ -124,16 +117,15 @@ $sql2->execute();
                     <?php echo $car['Transmission'] ?> <br>
                   </p>
                   <h4><?php echo $car['PricePerDay'] ?> $</h4>
-                  <a href="payment.php?location=<?php echo $location ?>&fromDate=<?php echo $fromDate ?>&toDate=<?php echo $toDate ?>&IdCar=<?php echo $car['IdCar'] ?>">Select</a>
+                  <a href="payment.php?location=<?php echo $location ?>&fromDate=<?php echo $fromDate ?>&toDate=<?php echo $toDate ?>&IdCar=<?php echo $car['IdCar'] ?> " onclick="checker()">Select</a>
                 </div>
               </div>
             <?php }
           }
 
-
           $car = $sql2->fetch(PDO::FETCH_ASSOC);
           if ($car) {
-            if ($car['IdStatus'] == 1) { ?>
+            if (!str_contains($str, $car['IdCar']) AND $car['IdStatus'] = 1) { ?>
               <div class="col2" id="cont">
                 <div class="carImage">
                   <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
@@ -145,7 +137,7 @@ $sql2->execute();
                     <?php echo $car['Transmission'] ?> <br>
                   </p>
                   <h4><?php echo $car['PricePerDay'] ?> $</h4>
-                  <a href="payment.php?location=<?php echo $location ?>&fromDate=<?php echo $fromDate ?>&toDate=<?php echo $toDate ?>&IdCar=<?php echo $car['IdCar'] ?>">Select</a>
+                  <a href="payment.php?location=<?php echo $location ?>&fromDate=<?php echo $fromDate ?>&toDate=<?php echo $toDate ?>&IdCar=<?php echo $car['IdCar'] ?>" onclick="checker()">Select</a>
                 </div>
               </div>
 

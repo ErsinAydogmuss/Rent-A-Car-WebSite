@@ -1,0 +1,145 @@
+	# Gender Table 
+    
+CREATE TABLE `Gender` (
+  `IdGender` INT(11) NOT NULL,
+  `Gender` VARCHAR(45),
+  PRIMARY KEY (`IdGender`));
+    
+	# Users Table
+
+CREATE TABLE IF NOT EXISTS `Users` (
+  `IdUser` INT(11) NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(100) NOT NULL,
+  `IdGender` VARCHAR(1) NOT NULL,
+  `Email` VARCHAR(45) NOT NULL,
+  `PhoneNumber` VARCHAR(45) NOT NULL,
+  `RegDate` DATE NULL DEFAULT CURRENT_TIMESTAMP(),
+  `Role` INT(1) NOT NULL DEFAULT 0,
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `UserImage` LONGBLOB,
+  PRIMARY KEY (`IdUser`),
+  UNIQUE INDEX `IdUser_UNIQUE` (`IdUser` ASC),
+  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC),
+  UNIQUE INDEX `PhoneNumber_UNIQUE` (`PhoneNumber` ASC),
+  FOREIGN KEY (`IdGender`) REFERENCES gender(`IdGender`) ON UPDATE CASCADE ON DELETE CASCADE
+ )
+ENGINE=InnoDB AUTO_INCREMENT=5;
+  
+ALTER TABLE `Users`
+  MODIFY `IdUser` INT(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  
+	# Status Table
+    
+CREATE TABLE `status` (
+  `IdStatus` INT(1) NOT NULL,
+  `Status` VARCHAR(45) NULL,
+  PRIMARY KEY (`IdStatus`)
+  );
+
+	# Transmission Table
+
+CREATE TABLE `transmission` (
+  `IdTransmission` INT(1) NOT NULL,
+  `Transmission` VARCHAR(45) NULL,
+  PRIMARY KEY (`IdTransmission`)
+  );
+  
+  # Branch Table
+  
+CREATE TABLE `Branch` (
+  `IdBranch` INT(11) NOT NULL,
+  `BranchName` VARCHAR(100) NULL,
+  PRIMARY KEY (`IdBranch`)
+  );
+  ALTER TABLE `branch`
+  MODIFY `IdBranch` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  
+  # FuelType Table
+  
+CREATE TABLE `fueltype` (
+  `IdFuelType` INT(1) NOT NULL,
+  `FuelType` VARCHAR(45) NULL,
+  PRIMARY KEY (`IdFuelType`)
+  );
+  
+  # Cars Table
+  
+CREATE TABLE IF NOT EXISTS `Cars` (
+  `IdCar` INT(11) NOT NULL,
+  `CarName` VARCHAR(120) NOT NULL,
+  `ModelYear` INT(4) NOT NULL,
+  `CreationDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `IdTransmission` INT(1) NOT NULL,
+  `SeatingCapacity` INT(3) NOT NULL,
+  `PricePerDay` INT(11) NOT NULL,
+  `CarImage` LONGBLOB NOT NULL,
+  `IdStatus` INT(1) NOT NULL DEFAULT 0,
+  `IdBranch` INT(11) NOT NULL,
+  `IDFuelType` INT(1) NOT NULL,
+  FOREIGN KEY (`IdBranch`) REFERENCES branch(`IdBranch`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (`IdTransmission`) REFERENCES Transmission(`IdTransmission`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (`IdStatus`) REFERENCES `Status`(`IdStatus`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (`IDFuelType`) REFERENCES FuelType(`IDFuelType`) ON UPDATE CASCADE ON DELETE CASCADE,
+  PRIMARY KEY (`IdCar`)
+) 
+ENGINE=InnoDB AUTO_INCREMENT=8;
+
+ALTER TABLE `Cars`
+  MODIFY `IdCar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  
+	#Review Table
+    
+CREATE TABLE IF NOT EXISTS `Review`(
+	`IdReview` INT(11) NOT NULL,
+    `Message` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`IdReview`)
+)
+ENGINE=InnoDB AUTO_INCREMENT=3;
+
+ALTER TABLE `Review`
+  MODIFY `IdReview` INT(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  
+	# Booking Table
+
+CREATE TABLE IF NOT EXISTS `Booking` (
+  `IdBooking` INT(11) NOT NULL,
+  `IdUser` INT(11) NOT NULL,
+  `IdCar` INT(11) NOT NULL,
+  `FromDate` DATE NOT NULL,
+  `ToDate` DATE NOT NULL,
+  `Price` INT(11) DEFAULT NULL,
+  `PostingDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `IdStatus` INT(1) DEFAULT 1,
+  `IdBranch` INT(11) NOT NULL,
+  `IdReview` INT(11),
+  PRIMARY KEY (`IdBooking`),
+  FOREIGN KEY (`IdUser`) REFERENCES Users(`IdUser`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (`IdCar`) REFERENCES Cars(`IdCar`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (`IdBranch`) REFERENCES Branch(`IdBranch`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (`IdStatus`) REFERENCES `Status`(`IdStatus`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (`IdReview`) REFERENCES Review(`IdReview`) ON UPDATE CASCADE ON DELETE CASCADE
+) 
+ENGINE=InnoDB AUTO_INCREMENT=4;
+  
+ALTER TABLE `Booking`
+  MODIFY `IdBooking` INT(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  
+	# Contact Us Table
+  
+CREATE TABLE IF NOT EXISTS `ContactUs` (
+  `IdContactUs` INT(11) NOT NULL,
+  `FullName` VARCHAR(55) NOT NULL,
+  `Email` VARCHAR(255) NOT NULL,
+  `PhoneNumber` INT(11) NOT NULL,
+  `Subject` VARCHAR(100) NOT NULL,
+  `Message` longtext NOT NULL,
+  `PostingDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`IdContactUs`)
+) 
+ENGINE=InnoDB AUTO_INCREMENT=2;
+
+ALTER TABLE `ContactUs`
+  MODIFY `IdContactUs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;

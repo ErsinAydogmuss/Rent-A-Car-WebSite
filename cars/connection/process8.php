@@ -21,8 +21,18 @@ if (isset($paymentBut)) {
     $loca -> execute();
     $theLoc = $loca->fetch(PDO::FETCH_ASSOC);
 
-    $sql = $db->prepare("INSERT INTO `booking` (`IdUser`, `IdCar`, `FromDate`, `ToDate`, `IdBranch`, `Price`) VALUES ('$theUser[IdUser]','$IdCar','$fromDate','$toDate','$theLoc[IdBranch]','$totalPrice')");
+    $sql = $db->prepare("INSERT INTO `booking` (`IdUser`, `IdCar`, `FromDate`, `ToDate`, `IdBranch`, `Price`, `IdStatus`) VALUES ('$theUser[IdUser]','$IdCar','$fromDate','$toDate','$theLoc[IdBranch]','$totalPrice','1')");
     $sql -> execute();
+
+    $sql2 = $db -> prepare("UPDATE `cars` SET `IdStatus` = '0' WHERE (`IdCar` = '$IdCar')");
+    $sql2 -> execute();
+
+    $sql3 = $db -> prepare("UPDATE `booking` SET `IdStatus` = '0' WHERE (ToDate < date('Y/m/d'))");
+    $sql3 -> execute();
+
+    while ($book = $sql3->fetch(PDO::FETCH_ASSOC)){
+
+    }
 
     header("Location:../index.php");
     exit;

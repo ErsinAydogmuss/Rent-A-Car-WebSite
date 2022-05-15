@@ -116,10 +116,10 @@ $sql2->execute();
                 <td><?php echo $book['FromDate'] ?></td>
                 <td><?php echo $book['ToDate'] ?></td>
                 <td><?php echo $book['BranchName'] ?></td>
-                <td><?php echo $book['Price'] ?></td>
+                <td><?php echo $book['Price'] ?>$</td>
                 <td><?php echo $book['Status'] ?></td>
                 <td class="but">
-                  <a href="connection/process13.php?IdBooking=<?php echo $book['IdBooking']; ?>"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Finish Rental</button></a>
+                  <a href="connection/process13.php?IdBooking=<?php echo $book['IdBooking']; ?>&finishRental=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Finish Rental</button></a>
                 </td>
               </tr>
 

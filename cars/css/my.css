@@ -1,0 +1,288 @@
+#contactSlider {
+    height: 250px;
+    background: url(../img/car7.jpg) center center no-repeat;
+    background-size: cover;
+  }
+  
+  #contactCaption {
+    height: 250px;
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  .contactTop {
+    font-size: 17px;
+    text-align: center;
+  }
+  
+  .contactBody {
+    background: url(../img/contact.jpg) center center no-repeat;
+  }
+
+  .contactForm {
+    margin: 0 auto;
+    width: 60%;
+  }
+
+  .container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+  }
+  
+  .featuresBody .container {
+    justify-content: space-between;
+  }
+  
+  .engineBody .container {
+    justify-content: space-between;
+  }
+
+  .container .login-form {
+    position: absolute;
+    top: 10%;
+    right: -110%;
+    width: 35rem;
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    border-radius: 15px;
+    background: #fff;
+    text-align: center;
+    display: none;
+  }
+  .container .login-form.active {
+    right: 2rem;
+    color: var(--black);
+    display: block;
+  }
+  
+  .container .login-form .box {
+    width: 90%;
+    margin: 10px;
+    background: #eee;
+    border-radius: 15px;
+    padding: 1rem;
+    font-size: 17px;
+    color: var(--black);
+    text-transform: none;
+  }
+  
+  .container .login-form p {
+    font-size: 18px;
+    padding: 0.5rem 0;
+    color: var(--light-color);
+  }
+  
+  .container .login-form .box:hover {
+    background-color: #b68e64;
+  }
+  
+  .container .login-form p a {
+    color: var(--green);
+    text-decoration: underline;
+  }
+  
+  .container .login-form p a:hover {
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  .containerFluid .col2 {
+    padding: 0;
+  }
+
+  .form-container form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    position: absolute;
+    bottom: 4rem;
+    left: 100px;
+    background: #b68e64;
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  header .logo {
+    margin-right: auto;
+  }
+  
+  head .logo img {
+    display: block;
+    height: 70px;
+  }
+
+  .menu li {
+    float: left;
+  }
+  .menu li a {
+    padding: 27px 17px;
+    display: block;
+    text-decoration: none;
+    letter-spacing: 2px;
+    color: #333;
+    transition: all 0.5s ease;
+  }
+  
+  .menu li:hover a {
+    background: #b68e64;
+    color: #fff;
+  
+  }
+
+  main .insights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+  }
+  
+  main .insights > div {
+    background: white;
+    padding: 1.8rem;
+    border-radius: 2rem;
+    margin-top: 1rem;
+    border: 2px solid #b68e64;
+  }
+  
+  main .insights > div:hover {
+    border: 3px solid #b87333;
+  }
+  
+  .insights table tbody tr td img {
+    width: 200px;
+  }
+  
+  main .insights > div span {
+    background: #b68e64;
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: white;
+    font-size: 2rem;
+  }
+  
+  main .insights > div.expenses span {
+    background: #b68e64;
+  }
+  
+  main .insights > div.income span {
+    background: #b68e64;
+  }
+  
+  main .insights > div .middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  main .insights h3 {
+    margin: 1rem 0 0.6rem;
+    font-size: 1rem;
+  }
+  
+  main .insights .progress {
+    position: relative;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+  }
+  
+  main .insights svg {
+    width: 7rem;
+    height: 7rem;
+  }
+  
+  main .insights svg circle {
+    fill: none;
+    stroke: #b87333;
+    stroke-width: 14;
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+  }
+  
+  main .insights .sales svg circle {
+    stroke-dashoffset: -30;
+    stroke-dasharray: 200;
+  }
+  
+  main .insights .expenses svg circle {
+    stroke-dashoffset: 20;
+    stroke-dasharray: 80;
+  }
+  
+  main .insights .income svg circle {
+    stroke-dashoffset: 35;
+    stroke-dasharray: 110;
+  }
+  
+  main .insights .progress .number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  main .insights small {
+    margin-top: 1.6rem;
+    display: block;
+  }
+
+  main .insights .photo {
+    border: none;
+  }
+
+  footer {
+    background: #b68e64;
+    text-align: center;
+  }
+  
+  .footerItem {
+    padding: 20px;
+  }
+  
+  .footerItem p {
+    font-size: 17px;
+  }
+  
+  .footerItem img {
+    height: 50px;
+    opacity: 0.5;
+  }
+  
+  footer h3 {
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  
+  footer .fa {
+    font-size: 30px;
+    color: #333;
+    line-height: 50px;
+    transition: 0.3s ease;
+  }
+  
+  footer .fa:hover {
+    color: #fff;
+  }
+  
+  footer p {
+    color: #333;
+    line-height: 20px;
+  }
+  
+  .footerLinks a {
+    text-decoration: none;
+    color: #333;
+    letter-spacing: 2px;
+    transition: 0.3s ease;
+  }
+  
+  .footerLinks a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }

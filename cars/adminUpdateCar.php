@@ -125,7 +125,8 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
                         $sqlBranch->execute();
                         ?>
                         <div class="input-field">
-                            <select name="branch" class="branch">
+                            <select name="branch" required class="branch">
+                                <option selected disabled>Select Branch</option>
                                 <?php while ($branch = $sqlBranch->fetch(PDO::FETCH_ASSOC)) { ?>
                                     <option value="<?php echo $branch['IdBranch'] ?>"><?php echo $branch['BranchName'] ?></option>
                                 <?php } ?>

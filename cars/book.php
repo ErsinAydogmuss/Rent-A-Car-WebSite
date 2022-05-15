@@ -2,7 +2,7 @@
 include 'connection/config2.php';
 ob_start();
 session_start();
-if(isset($_SESSION['email'])) {
+if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
 }
 ?>
@@ -26,47 +26,47 @@ if(isset($_SESSION['email'])) {
 </head>
 
 <body>
-<header>
-    <div class="container">
-      <div class="logo">
-        <a href="index.php">
-          <img src="img/carIcon.jpg" alt="carIcon" />
-        </a>
-      </div>
-      <div class="menu">
-        <ul>
-          <li><a href="book.php">Book</a></li>
-          <li><a href="cars.php">Cars</a></li>
-          <li><a href="contact.php">Contact</a></li>
-          <?php
-          if(isset($_SESSION['email'])){?>
-            <a href="myAccount.php">
-            <span class="material-icons-sharp logosa">person</span>
-            </a>
-          <?php } else {?>
-            <li><a href="#" id="login-btn">Login</a></li>
-            <?php }?>
-            
-        
-        </ul>
-      </div>
-      <form action="connection/process4.php" class="login-form" method="POST">
-        <h3>Login</h3>
-        <?php
-        if (isset($_GET['status'])) {
-          if ($_GET['status'] == "error") { ?>
-            <div class="alert alert-danger">
-              <strong>Error!</strong> Login failed...
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php">
+                    <img src="img/carIcon.jpg" alt="carIcon" />
+                </a>
             </div>
-        <?php }
-        } ?>
-        <input type="email" name="email" placeholder="Your Email..." class="box" />
-        <input type="password" name="password" placeholder="Your Password..." class="box" />
-        <p>Don't have an account <a href="signUp.php">Create Now</a></p>
-        <input type="submit" value="Login Now" class="btnLgn" name="login" />
-      </form>
-    </div>
-  </header>
+            <div class="menu">
+                <ul>
+                    <li><a href="book.php">Book</a></li>
+                    <li><a href="cars.php">Cars</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <?php
+                    if (isset($_SESSION['email'])) { ?>
+                        <a href="myAccount.php">
+                            <span class="material-icons-sharp logosa">person</span>
+                        </a>
+                    <?php } else { ?>
+                        <li><a href="#" id="login-btn">Login</a></li>
+                    <?php } ?>
+
+
+                </ul>
+            </div>
+            <form action="connection/process4.php" class="login-form" method="POST">
+                <h3>Login</h3>
+                <?php
+                if (isset($_GET['status'])) {
+                    if ($_GET['status'] == "error") { ?>
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> Login failed...
+                        </div>
+                <?php }
+                } ?>
+                <input type="email" name="email" placeholder="Your Email..." class="box" />
+                <input type="password" name="password" placeholder="Your Password..." class="box" />
+                <p>Don't have an account <a href="signUp.php">Create Now</a></p>
+                <input type="submit" value="Login Now" class="btnLgn" name="login" />
+            </form>
+        </div>
+    </header>
 
     <!-- Main Section -->
 
@@ -87,22 +87,24 @@ if(isset($_SESSION['email'])) {
             <div class="container">
                 <div class="form-container">
                     <?php
-                        $sqlBranch = $db->prepare("SELECT * FROM branch");
-                        $sqlBranch->execute();
+                    $sqlBranch = $db->prepare("SELECT * FROM branch");
+                    $sqlBranch->execute();
                     ?>
                     <form method="POST" action="connection/process6.php">
                         <div class="input-box">
-                            <select name="branch" class="branch">
-                                <?php while ($branch = $sqlBranch->fetch(PDO::FETCH_ASSOC)) {?>
-                                <option value="<?php echo $branch['BranchName'] ?>"><?php echo $branch['BranchName'] ?></option>
-                                <?php }?>
+                            <select name="branch" class="branch" required>
+                                <option selected disabled>Select Branch</option>
+                                <?php while ($branch = $sqlBranch->fetch(PDO::FETCH_ASSOC)) { ?>
+
+                                    <option value="<?php echo $branch['BranchName'] ?>"><?php echo $branch['BranchName'] ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="input-box">
-                            <input type="date" min="<?php echo date("Y-m-d"); ?>" name="fromDate">
+                            <input type="date" required min="<?php echo date("Y-m-d"); ?>" name="fromDate">
                         </div>
                         <div class="input-box">
-                            <input type="date" min="<?php echo date("Y-m-d"); ?>" name="toDate">
+                            <input type="date" required min="<?php echo date("Y-m-d"); ?>" name="toDate">
                         </div>
                         <button type="submit" class="btn" name="bookBtn">Submit</button>
                     </form>
