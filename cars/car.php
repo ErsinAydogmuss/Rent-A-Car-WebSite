@@ -2,11 +2,30 @@
 include 'connection/config2.php';
 ob_start();
 session_start();
+
+if(isset($_SESSION['email'])){
+  
 $email = $_SESSION['email'];
 $location = $_GET['location'];
-
 $fromDate = $_GET['fromDate'];
 $toDate = $_GET['toDate'];
+
+}
+else {
+  header("Location:index.php");
+}
+
+
+
+
+
+
+
+
+
+
+
+
 $sql2 = $db->prepare("SELECT * FROM cars c, branch b, status s, transmission t WHERE c.IdBranch = b.IdBranch AND b.BranchName = '$location' AND c.IdStatus = s.IdStatus AND t.IdTransmission = c.IdTransmission");
 $sql2->execute();
 
@@ -31,7 +50,7 @@ $sql2->execute();
 </head>
 
 <body>
-  <header>
+<header>
     <div class="container">
       <div class="logo">
         <a href="index.php">
@@ -45,9 +64,10 @@ $sql2->execute();
           <li><a href="contact.php">Contact</a></li>
           <?php
           if (isset($_SESSION['email'])) { ?>
-            <a href="myAccount.php">
-              <span class="material-icons-sharp logosa">person</span>
-            </a>
+            <li><a href="myAccount.php">
+                <span class="material-icons-sharp logosa">person</span>
+              </a></li>
+
           <?php } else { ?>
             <li><a href="#" id="login-btn">Login</a></li>
           <?php } ?>

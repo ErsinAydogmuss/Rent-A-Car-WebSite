@@ -12,12 +12,16 @@ if(isset($button)) {
     $subject = htmlspecialchars($_POST['subject']);
     $message = htmlspecialchars($_POST['message']);
 
+    echo $eMail;
+
     $sql = $db -> prepare("INSERT INTO `rent_a_ride`.`contactus` (`FullName`, `Email`, `PhoneNumber`, `Subject`, `Message`) VALUES ('$fullName', '$eMail', '$phoneNumber', '$subject', '$message');
     ");
+    
     $sql -> execute();
-
-    header("Location:../index.php");
+    
+    Header("Location:../index.php");
     exit;
+    
 }
 
 

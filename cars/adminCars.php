@@ -83,6 +83,7 @@ $sql2->execute();
           <thead>
             <tr>
               <th>Image</th>
+              <th>Car Id</th>
               <th>Branch Name</th>
               <th>Car Name</th>
               <th>Model Year</th>
@@ -105,7 +106,8 @@ $sql2->execute();
 
             ?>
               <tr>
-                <td><img src="img/<?php echo $car['CarImage']?>" alt=""></td>
+                <td><img src="<?php echo substr($car['CarImage'], 3) ?>" alt=""></td>
+                <td><?php echo $car['IdCar'] ?></td>
                 <td><?php echo $car['BranchName'] ?></td>
                 <td><?php echo $car['CarName'] ?></td>
                 <td><?php echo $car['ModelYear'] ?></td>

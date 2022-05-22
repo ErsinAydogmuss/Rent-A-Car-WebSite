@@ -36,15 +36,16 @@ session_start();
           <li><a href="cars.php">Cars</a></li>
           <li><a href="contact.php">Contact</a></li>
           <?php
-          if(isset($_SESSION['email'])){?>
-            <a href="myAccount.php">
-            <span class="material-icons-sharp logosa">person</span>
-            </a>
-          <?php } else {?>
+          if (isset($_SESSION['email'])) { ?>
+            <li><a href="myAccount.php">
+                <span class="material-icons-sharp logosa">person</span>
+              </a></li>
+
+          <?php } else { ?>
             <li><a href="#" id="login-btn">Login</a></li>
-            <?php }?>
-            
-        
+          <?php } ?>
+
+
         </ul>
       </div>
       <form action="connection/process4.php" class="login-form" method="POST">

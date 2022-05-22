@@ -14,7 +14,7 @@ if ($admin['Role'] == 0) {
   exit;
 }
 
-$sql2 = $db->prepare("SELECT * FROM branch");
+$sql2 = $db->prepare("SELECT * FROM branch b ");
 $sql2->execute();
 
 ?>
@@ -73,11 +73,12 @@ $sql2->execute();
     </aside>
 
     <main>
-      <h1>Cars</h1>
+      <h1>Branchs</h1>
       <div class="insights cust">
         <table>
           <thead>
             <tr>
+              <th>Branch Id</th>
               <th>Branch Name</th>
               <th></th>
             </tr>
@@ -90,6 +91,7 @@ $sql2->execute();
 
             ?>
               <tr>
+                <td><?php echo $branch['IdBranch'] ?></td>
                 <td><?php echo $branch['BranchName'] ?></td>
                 <td>
                   <a href="connection/process12.php?IdBranch=<?php echo $branch['IdBranch']; ?>&branchDelete=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Delete</button></a>

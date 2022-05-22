@@ -26,47 +26,48 @@ if (isset($_SESSION['email'])) {
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.php">
-                    <img src="img/carIcon.jpg" alt="carIcon" />
-                </a>
-            </div>
-            <div class="menu">
-                <ul>
-                    <li><a href="book.php">Book</a></li>
-                    <li><a href="cars.php">Cars</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                    <?php
-                    if (isset($_SESSION['email'])) { ?>
-                        <a href="myAccount.php">
-                            <span class="material-icons-sharp logosa">person</span>
-                        </a>
-                    <?php } else { ?>
-                        <li><a href="#" id="login-btn">Login</a></li>
-                    <?php } ?>
+<header>
+    <div class="container">
+      <div class="logo">
+        <a href="index.php">
+          <img src="img/carIcon.jpg" alt="carIcon" />
+        </a>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="book.php">Book</a></li>
+          <li><a href="cars.php">Cars</a></li>
+          <li><a href="contact.php">Contact</a></li>
+          <?php
+          if (isset($_SESSION['email'])) { ?>
+            <li><a href="myAccount.php">
+                <span class="material-icons-sharp logosa">person</span>
+              </a></li>
+
+          <?php } else { ?>
+            <li><a href="#" id="login-btn">Login</a></li>
+          <?php } ?>
 
 
-                </ul>
+        </ul>
+      </div>
+      <form action="connection/process4.php" class="login-form" method="POST">
+        <h3>Login</h3>
+        <?php
+        if (isset($_GET['status'])) {
+          if ($_GET['status'] == "error") { ?>
+            <div class="alert alert-danger">
+              <strong>Error!</strong> Login failed...
             </div>
-            <form action="connection/process4.php" class="login-form" method="POST">
-                <h3>Login</h3>
-                <?php
-                if (isset($_GET['status'])) {
-                    if ($_GET['status'] == "error") { ?>
-                        <div class="alert alert-danger">
-                            <strong>Error!</strong> Login failed...
-                        </div>
-                <?php }
-                } ?>
-                <input type="email" name="email" placeholder="Your Email..." class="box" />
-                <input type="password" name="password" placeholder="Your Password..." class="box" />
-                <p>Don't have an account <a href="signUp.php">Create Now</a></p>
-                <input type="submit" value="Login Now" class="btnLgn" name="login" />
-            </form>
-        </div>
-    </header>
+        <?php }
+        } ?>
+        <input type="email" name="email" placeholder="Your Email..." class="box" />
+        <input type="password" name="password" placeholder="Your Password..." class="box" />
+        <p>Don't have an account <a href="signUp.php">Create Now</a></p>
+        <input type="submit" value="Login Now" class="btnLgn" name="login" />
+      </form>
+    </div>
+  </header>
 
     <!-- Main Section -->
 

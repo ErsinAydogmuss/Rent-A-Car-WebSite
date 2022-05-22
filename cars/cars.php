@@ -2,17 +2,18 @@
 include 'connection/config2.php';
 ob_start();
 session_start();
-if(isset($_SESSION['email'])) {
+if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
 }
 
 
 
 
-$sql2 = $db->prepare("SELECT * FROM cars c, transmission t, fueltype ft, status s, branch b  WHERE 
+$sql2 = $db->prepare("SELECT * FROM cars c, transmission t, fueltype ft, carType ct, status s, branch b  WHERE 
 c.IdTransmission = t.IdTransmission AND
 c.IdFuelType = ft.IdFuelType and
 c.IdStatus = s.IdStatus and
+c.IdCarType = ct.IdCarType and
 c.IdBranch = b.IdBranch");
 $sql2->execute();
 
@@ -38,47 +39,48 @@ $sql2->execute();
 </head>
 
 <body>
-<header>
-    <div class="container">
-      <div class="logo">
-        <a href="index.php">
-          <img src="img/carIcon.jpg" alt="carIcon" />
-        </a>
-      </div>
-      <div class="menu">
-        <ul>
-          <li><a href="book.php">Book</a></li>
-          <li><a href="cars.php">Cars</a></li>
-          <li><a href="contact.php">Contact</a></li>
-          <?php
-          if(isset($_SESSION['email'])){?>
-            <a href="myAccount.php">
-            <span class="material-icons-sharp logosa">person</span>
-            </a>
-          <?php } else {?>
-            <li><a href="#" id="login-btn">Login</a></li>
-            <?php }?>
-            
-        
-        </ul>
-      </div>
-      <form action="connection/process4.php" class="login-form" method="POST">
-        <h3>Login</h3>
-        <?php
-        if (isset($_GET['status'])) {
-          if ($_GET['status'] == "error") { ?>
-            <div class="alert alert-danger">
-              <strong>Error!</strong> Login failed...
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.php">
+                    <img src="img/carIcon.jpg" alt="carIcon" />
+                </a>
             </div>
-        <?php }
-        } ?>
-        <input type="email" name="email" placeholder="Your Email..." class="box" />
-        <input type="password" name="password" placeholder="Your Password..." class="box" />
-        <p>Don't have an account <a href="signUp.php">Create Now</a></p>
-        <input type="submit" value="Login Now" class="btnLgn" name="login" />
-      </form>
-    </div>
-  </header>
+            <div class="menu">
+                <ul>
+                    <li><a href="book.php">Book</a></li>
+                    <li><a href="cars.php">Cars</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <?php
+                    if (isset($_SESSION['email'])) { ?>
+                        <li><a href="myAccount.php">
+                                <span class="material-icons-sharp logosa">person</span>
+                            </a></li>
+
+                    <?php } else { ?>
+                        <li><a href="#" id="login-btn">Login</a></li>
+                    <?php } ?>
+
+
+                </ul>
+            </div>
+            <form action="connection/process4.php" class="login-form" method="POST">
+                <h3>Login</h3>
+                <?php
+                if (isset($_GET['status'])) {
+                    if ($_GET['status'] == "error") { ?>
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> Login failed...
+                        </div>
+                <?php }
+                } ?>
+                <input type="email" name="email" placeholder="Your Email..." class="box" />
+                <input type="password" name="password" placeholder="Your Password..." class="box" />
+                <p>Don't have an account <a href="signUp.php">Create Now</a></p>
+                <input type="submit" value="Login Now" class="btnLgn" name="login" />
+            </form>
+        </div>
+    </header>
 
     <!-- Main Section -->
 
@@ -101,48 +103,51 @@ $sql2->execute();
             ?>
 
                 <div class="container">
-                    <?php if ($car) { 
-                        if($car['IdStatus'] == 1) {?>
-                        <div class="col2" id="cont">
-                            <div class="inspectImage">
-                                <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
+                    <?php if ($car) {
+                        if ($car['IdStatus'] == 1) { ?>
+                            <div class="col2" id="cont">
+                                <div class="inspectImage">
+                                    <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
+                                </div>
+                                <div class="inspectText">
+                                    <p class="date"><?php echo $car['ModelYear'] ?></p>
+                                    <h4><?php echo $car['CarName'] ?></h2>
+                                    <h3><?php echo $car['CarType'] ?></h3>
+                                    <h3><?php echo $car['BranchName'] ?></h4>
+                                    <p>
+                                        <?php echo $car['SeatingCapacity'] ?> Seats <br>
+                                        <?php echo $car['Transmission'] ?> <br>
+                                        <?php echo $car['FuelType'] ?> <br>
+                                    </p>
+                                    <h4><?php echo $car['PricePerDay'] ?> $ </h4>
+                                </div>
                             </div>
-                            <div class="inspectText">
-                                <p class="date"><?php echo $car['ModelYear'] ?></p>
-                                <h4><?php echo $car['CarName'] ?></h4>
-                                <h3><?php echo $car['BranchName'] ?></h3>
-                                <p>
-                                    <?php echo $car['SeatingCapacity'] ?> Seats <br>
-                                    <?php echo $car['Transmission'] ?> <br>
-                                    <?php echo $car['FuelType'] ?> <br>
 
-                                </p>
-                                <h4><?php echo $car['PricePerDay'] ?> $ </h4>
-                            </div>
-                        </div>
-
-                    <?php } }
+                        <?php }
+                    }
                     $car = $sql2->fetch(PDO::FETCH_ASSOC);
                     if ($car) {
-                        if($car['IdStatus'] = 1) {
+                        if ($car['IdStatus'] = 1) {
 
-                    ?>
-                        <div class="col2" id="cont">
-                            <div class="inspectImage">
-                                <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
-                            </div>
-                            <div class="inspectText">
+                        ?>
+                            <div class="col2" id="cont">
+                                <div class="inspectImage">
+                                    <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
+                                </div>
+                                <div class="inspectText">
                                 <p class="date"><?php echo $car['ModelYear'] ?></p>
-                                <h4><?php echo $car['CarName'] ?></h4>
-                                <h3><?php echo $car['BranchName'] ?></h3>
-                                <p>
-                                    <?php echo $car['SeatingCapacity'] ?> Seats <br>
-                                    <?php echo $car['Transmission'] ?>  <br>
-                                </p>
-                                <h4><?php echo $car['PricePerDay'] ?> $ </h4>
+                                    <h4><?php echo $car['CarName'] ?></h2>
+                                    <h3><?php echo $car['CarType'] ?></h3>
+                                    <h3><?php echo $car['BranchName'] ?></h4>
+                                    <p>
+                                        <?php echo $car['SeatingCapacity'] ?> Seats <br>
+                                        <?php echo $car['Transmission'] ?> <br>
+                                    </p>
+                                    <h4><?php echo $car['PricePerDay'] ?> $ </h4>
+                                </div>
                             </div>
-                        </div>
-                    <?php } }?>
+                    <?php }
+                    } ?>
                 </div>
 
             <?php } ?>

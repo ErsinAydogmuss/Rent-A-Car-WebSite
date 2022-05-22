@@ -27,13 +27,6 @@ if (isset($paymentBut)) {
     $sql2 = $db -> prepare("UPDATE `cars` SET `IdStatus` = '0' WHERE (`IdCar` = '$IdCar')");
     $sql2 -> execute();
 
-    $sql3 = $db -> prepare("UPDATE `booking` SET `IdStatus` = '0' WHERE (ToDate < date('Y/m/d'))");
-    $sql3 -> execute();
-
-    while ($book = $sql3->fetch(PDO::FETCH_ASSOC)){
-
-    }
-
     header("Location:../index.php");
     exit;
     
