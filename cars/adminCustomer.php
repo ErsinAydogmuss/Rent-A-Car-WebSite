@@ -64,15 +64,24 @@ $sql2->execute();
           <span class="material-icons-sharp"> account_balance </span>
           <h3>Branch</h3>
         </a>
+        <a href="adminAddToBranch.php">
+          <span class="material-icons-sharp"> add </span>
+          <h3>Add Branch</h3>
+        </a>
         <a href="adminCars.php">
           <span class="material-icons-sharp"> time_to_leave </span>
           <h3>Cars</h3>
         </a>
+        <a href="adminAddToCar.php">
+          <span class="material-icons-sharp"> add </span>
+          <h3> Add Cars</h3>
+        </a>
+
         <a href="adminMessages.php">
           <span class="material-icons-sharp">mail_outline</span>
           <h3>Messages</h3>
         </a>
-        <a href="index.php">
+        <a href="adminLogin.php" onclick="checker()">
           <span class="material-icons-sharp">logout</span>
           <h3>Logout</h3>
         </a>
@@ -113,7 +122,7 @@ $sql2->execute();
                 <td><?php echo $user['BirthDate'] ?></td>
                 <td><?php echo $user['RegDate'] ?></td>
                 <td>
-                  <a href="connection/process11.php?IdUser=<?php echo $user['IdUser']; ?>&userDelete=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Delete</button></a>
+                  <a href="connection/process11.php?IdUser=<?php echo $user['IdUser']; ?>&userDelete=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;" onclick="checker()">Delete</button></a>
                 </td>
               </tr>
 
@@ -127,7 +136,7 @@ $sql2->execute();
         </table>
       </div>
     </main>
-    
+
   </div>
 
 

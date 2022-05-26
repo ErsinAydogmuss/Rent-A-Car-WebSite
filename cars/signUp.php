@@ -129,9 +129,9 @@
               <label>Gender</label>
               <div class="custom_select">
                 <select name="gender">
-                  <option value="">Select</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                  <option disabled value="">Select</option>
+                  <option value="1">Male</option>
+                  <option value="2">Female</option>
                 </select>
               </div>
             </div>

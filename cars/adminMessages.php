@@ -26,7 +26,7 @@ $sql2->execute();
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Cars Page</title>
+  <title>Admin Messages</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
   <link rel="stylesheet" href="./css/admin.css" />
 </head>
@@ -57,15 +57,24 @@ $sql2->execute();
           <span class="material-icons-sharp"> account_balance </span>
           <h3>Branch</h3>
         </a>
+        <a href="adminAddToBranch.php">
+          <span class="material-icons-sharp"> add </span>
+          <h3>Add Branch</h3>
+        </a>
         <a href="adminCars.php">
           <span class="material-icons-sharp"> time_to_leave </span>
           <h3>Cars</h3>
         </a>
+        <a href="adminAddToCar.php">
+          <span class="material-icons-sharp"> add </span>
+          <h3> Add Cars</h3>
+        </a>
+
         <a href="adminMessages.php">
           <span class="material-icons-sharp">mail_outline</span>
           <h3>Messages</h3>
         </a>
-        <a href="index.php">
+        <a href="adminLogin.php" onclick="checker()">
           <span class="material-icons-sharp">logout</span>
           <h3>Logout</h3>
         </a>

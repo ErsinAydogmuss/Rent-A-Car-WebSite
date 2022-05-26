@@ -3,15 +3,15 @@ include 'connection/config2.php';
 ob_start();
 session_start();
 
-if(isset($_SESSION['email'])){
-  
-$email = $_SESSION['email'];
-$location = $_GET['location'];
-$fromDate = $_GET['fromDate'];
-$toDate = $_GET['toDate'];
+if (isset($_SESSION['email'])) {
 
-}
-else {
+  $email = $_SESSION['email'];
+  $location = $_GET['location'];
+  $fromDate = $_GET['fromDate'];
+  $toDate = $_GET['toDate'];
+  $carType = $_GET['IdcarType'];
+
+} else {
   header("Location:index.php");
 }
 
@@ -26,7 +26,15 @@ else {
 
 
 
-$sql2 = $db->prepare("SELECT * FROM cars c, branch b, status s, transmission t WHERE c.IdBranch = b.IdBranch AND b.BranchName = '$location' AND c.IdStatus = s.IdStatus AND t.IdTransmission = c.IdTransmission");
+$sql2 = $db->prepare("SELECT DISTINCT * FROM cars c 
+INNER JOIN branch b ON c.IdBranch = b.IdBranch 
+INNER JOIN status s ON c.IdStatus = s.IdStatus 
+INNER JOIN transmission t ON c.IdTransmission = t.IdTransmission INNER JOIN fueltype ft ON c.IdFuelType = ft.IdFuelType 
+INNER JOIN cartype ct ON c.IdCarType = ct.IdCarType
+WHERE BranchName = '$location' 
+AND c.IdStatus = '1' 
+AND c.IdCarType = '$carType';
+");
 $sql2->execute();
 
 
@@ -50,7 +58,7 @@ $sql2->execute();
 </head>
 
 <body>
-<header>
+  <header>
     <div class="container">
       <div class="logo">
         <a href="index.php">
@@ -116,27 +124,34 @@ $sql2->execute();
       $sql3->execute();
 
       $str = "";
-            while ($thecar = $sql3->fetch(PDO::FETCH_ASSOC)) {
-              $str .= $thecar['IdCar'] . " ";
-            }
-                
+      while ($thecar = $sql3->fetch(PDO::FETCH_ASSOC)) {
+        $str .= $thecar['IdCar'] . " ";
+      }
+
       while ($car = $sql2->fetch(PDO::FETCH_ASSOC)) {
       ?>
         <div class="container">
-          
+
           <?php if ($car) {
-             if (!str_contains($str, $car['IdCar']) AND $car['IdStatus'] = 1) { ?>
+            if (!strpos($str, $car['IdCar']) AND 
+            $car['IdCarType'] ='5') 
+            { ?>
               <div class="col2" id="cont">
                 <div class="carImage">
                   <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
                 </div>
                 <div class="carText">
                   <p class="date"><?php echo $car['ModelYear'] ?></p>
-                  <h4><?php echo $car['CarName'] ?></h4>
-                  <p><?php echo $car['SeatingCapacity'] ?> Seats <br>
+                  <h4><?php echo $car['CarName'] ?></h2>
+                    <h3><?php echo $car['CarType'] ?></h3>
+                    <h3><?php echo $car['BranchName'] ?>
+                  </h4>
+                  <p>
+                    <?php echo $car['SeatingCapacity'] ?> Seats <br>
                     <?php echo $car['Transmission'] ?> <br>
+                    <?php echo $car['FuelType'] ?> <br>
                   </p>
-                  <h4><?php echo $car['PricePerDay'] ?> $</h4>
+                  <h4><?php echo $car['PricePerDay'] ?> $ </h4>
                   <a href="payment.php?location=<?php echo $location ?>&fromDate=<?php echo $fromDate ?>&toDate=<?php echo $toDate ?>&IdCar=<?php echo $car['IdCar'] ?> " onclick="checker()">Select</a>
                 </div>
               </div>
@@ -145,18 +160,23 @@ $sql2->execute();
 
           $car = $sql2->fetch(PDO::FETCH_ASSOC);
           if ($car) {
-            if (!str_contains($str, $car['IdCar']) AND $car['IdStatus'] = 1) { ?>
+            if (!strpos($str, $car['IdCar']) and $car['IdStatus'] = 1 and $car['IdCarType'] = '5') { ?>
               <div class="col2" id="cont">
                 <div class="carImage">
                   <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
                 </div>
                 <div class="carText">
                   <p class="date"><?php echo $car['ModelYear'] ?></p>
-                  <h4><?php echo $car['CarName'] ?></h4>
-                  <p><?php echo $car['SeatingCapacity'] ?> Seats <br>
+                  <h4><?php echo $car['CarName'] ?></h2>
+                    <h3><?php echo $car['CarType'] ?></h3>
+                    <h3><?php echo $car['BranchName'] ?>
+                  </h4>
+                  <p>
+                    <?php echo $car['SeatingCapacity'] ?> Seats <br>
                     <?php echo $car['Transmission'] ?> <br>
+                    <?php echo $car['FuelType'] ?> <br>
                   </p>
-                  <h4><?php echo $car['PricePerDay'] ?> $</h4>
+                  <h4><?php echo $car['PricePerDay'] ?> $ </h4>
                   <a href="payment.php?location=<?php echo $location ?>&fromDate=<?php echo $fromDate ?>&toDate=<?php echo $toDate ?>&IdCar=<?php echo $car['IdCar'] ?>" onclick="checker()">Select</a>
                 </div>
               </div>

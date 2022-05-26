@@ -25,3 +25,9 @@ function checker() {
         event.preventDefault;
     }
 }
+function checkerEdit() {
+    var result = confirm('Are you sure you want to update?');
+    if (result == false){
+        event.preventDefault;
+    }
+}

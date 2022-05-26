@@ -174,7 +174,7 @@ $buy = $dateDiff * $theCar['PricePerDay'];
                   </div>
                 </div>
                 <div class="button">
-                  <button type="submit" class="priceButton" name="paymentBut">
+                  <button type="submit" class="priceButton" name="paymentBut" onclick="checker()">
                     Submit
                   </button>
                 </div>

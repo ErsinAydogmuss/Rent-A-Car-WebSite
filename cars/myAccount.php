@@ -4,6 +4,17 @@ ob_start();
 session_start();
 $email = $_SESSION['email'];
 
+$sql = $db->prepare("SELECT * FROM users WHERE Email=:email");
+$sql->execute(array(
+  'email' => $_SESSION['email']
+));
+$isUser = $sql->fetch(PDO::FETCH_ASSOC);
+
+if ($sql->rowCount() == 0) {
+  Header("Location:index.php");
+  exit;
+}
+
 $sql2 = $db->prepare("SELECT * FROM booking b, users u, cars c, branch br, status s WHERE 
 u.Email = '$email' AND 
 b.IdCar = c.IdCar AND
@@ -39,7 +50,21 @@ $sql2->execute();
         </div>
       </div>
       <div class="sideBar">
-        <a href="index.php">
+        <a href="editProfile.php">
+          <span class="material-icons-sharp">edit</span>
+          <h3>Edit Profile</h3>
+        </a>
+        <a href="myAccount.php">
+          <span class="material-icons-sharp">content_paste</span>
+          <h3>My Past Trips</h3>
+        </a>
+
+        <a href="changePassword.php">
+          <span class="material-icons-sharp">lock</span>
+          <h3>Change Password</h3>
+        </a>
+
+        <a href="connection/logout2.php" onclick="checker()">
           <span class="material-icons-sharp">logout</span>
           <h3>Logout</h3>
         </a>
@@ -88,7 +113,7 @@ $sql2->execute();
       </div>
     </main>
 
-    
+
   </div>
 
   <script src="js/script.js"></script>

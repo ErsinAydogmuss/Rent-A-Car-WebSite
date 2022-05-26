@@ -90,6 +90,9 @@ if (isset($_SESSION['email'])) {
                     <?php
                     $sqlBranch = $db->prepare("SELECT * FROM branch");
                     $sqlBranch->execute();
+
+                    $sqlCarType = $db -> prepare("SELECT * FROM cartype");
+                    $sqlCarType -> execute();
                     ?>
                     <form method="POST" action="connection/process6.php">
                         <div class="input-box">
@@ -102,12 +105,22 @@ if (isset($_SESSION['email'])) {
                             </select>
                         </div>
                         <div class="input-box">
+                            <select name="carType" class="branch" required>
+                                <option selected disabled>Select Car Type</option>
+                                
+                                <?php while ($carType = $sqlCarType->fetch(PDO::FETCH_ASSOC)) { ?>
+                                    <?php echo $carType['CarType'] ?> 
+                                    <option value="<?php echo $carType['IdCarType'] ?>"><?php echo $carType['CarType'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="input-box">
                             <input type="date" required min="<?php echo date("Y-m-d"); ?>" name="fromDate">
                         </div>
                         <div class="input-box">
                             <input type="date" required min="<?php echo date("Y-m-d"); ?>" name="toDate">
                         </div>
-                        <button type="submit" class="btn" name="bookBtn">Submit</button>
+                        <button type="submit" class="btn" name="bookBtn" onclick="checker()">Submit</button>
                     </form>
                 </div>
             </div>

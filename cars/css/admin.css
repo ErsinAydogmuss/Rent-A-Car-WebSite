@@ -153,6 +153,7 @@ aside .sideBar a:hover span {
 
 main {
   margin-top: 1.4rem;
+  width: 70%;
 }
 
 main h1 {
@@ -453,7 +454,7 @@ main .cust {
 }
 
 main .cust table {
-  border-spacing: 30px;
+  border-spacing: 15px;
 }
 
 /* Responsive Settings */

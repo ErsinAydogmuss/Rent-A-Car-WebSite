@@ -56,15 +56,24 @@ if ($admin['Role'] == 0) {
                     <span class="material-icons-sharp"> account_balance </span>
                     <h3>Branch</h3>
                 </a>
+                <a href="adminAddToBranch.php">
+                    <span class="material-icons-sharp"> add </span>
+                    <h3>Add Branch</h3>
+                </a>
                 <a href="adminCars.php">
                     <span class="material-icons-sharp"> time_to_leave </span>
                     <h3>Cars</h3>
                 </a>
+                <a href="adminAddToCar.php">
+                    <span class="material-icons-sharp"> add </span>
+                    <h3> Add Cars</h3>
+                </a>
+
                 <a href="adminMessages.php">
                     <span class="material-icons-sharp">mail_outline</span>
                     <h3>Messages</h3>
                 </a>
-                <a href="index.php">
+                <a href="adminLogin.php" onclick="checker()">
                     <span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -83,7 +92,7 @@ if ($admin['Role'] == 0) {
                     <div class="fields">
                         <div class="input-field">
                             <label>Car Image</label>
-                            <input type="file" name="fileImage"  required style="border:none">
+                            <input type="file" name="fileImage" required style="border:none">
                         </div>
 
                         <div class="input-field">

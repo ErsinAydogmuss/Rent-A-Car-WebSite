@@ -61,7 +61,7 @@ session_start();
         <input type="email" name="email" placeholder="Your Email..." class="box" />
         <input type="password" name="password" placeholder="Your Password..." class="box" />
         <p>Don't have an account <a href="signUp.php">Create Now</a></p>
-        <input type="submit" value="Login Now" class="btnLgn" name="login" />
+        <input type="submit" value="Login Now" class="btnLgn" name="login"/>
       </form>
     </div>
   </header>
@@ -117,7 +117,7 @@ session_start();
                             <textarea class="formField" name="message" placeholder="Message" rows="8"></textarea>
                         </div>
                         <div class="formItem">
-                            <button class="formBtn" name="sbmt" type="submit" value="Submit">Submit</button>
+                            <button class="formBtn" name="sbmt" type="submit" value="Submit" onclick="checker()">Submit</button>
                         </div>
                     </form>
                 </div>

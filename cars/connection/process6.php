@@ -8,9 +8,10 @@ if(isset($bookBtn)){
     $location = $_POST['branch'];
     $fromDate = $_POST['fromDate'];
     $toDate = $_POST['toDate'];
+    $IdcarType = $_POST['carType'];
     
     if(strtotime($toDate) >= strtotime($fromDate)){
-        header("Location:../car.php?location=$location&fromDate=$fromDate&toDate=$toDate");
+        header("Location:../car.php?location=$location&fromDate=$fromDate&toDate=$toDate&IdcarType=$IdcarType");
         exit;
     }
     else {

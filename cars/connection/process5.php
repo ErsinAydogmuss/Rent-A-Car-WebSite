@@ -29,7 +29,8 @@ if (isset($but)) {
                 $count = $userControl->rowCount();
                 $pass = md5($userCPassword);
                 $role = 0;
-                $registerUser = $db->prepare("INSERT INTO users (Name, LastName, Password, Gender, Email, PhoneNumber, IdNumber) values('$userfName', '$userlName', '$userPassword', '$userGender', '$userMail', '$userPhoneNumber', '$idNumber')");
+                print_r($userfName);
+                $registerUser = $db->prepare("INSERT INTO users (Name, LastName, Password, IdGender, Email, PhoneNumber, IdNumber) values('$userfName', '$userlName', '$userPassword', '$userGender', '$userMail', '$userPhoneNumber', '$idNumber')");
                 $registerUser->execute();
 
 

@@ -77,15 +77,24 @@ $sql7->execute();
           <span class="material-icons-sharp"> account_balance </span>
           <h3>Branch</h3>
         </a>
+        <a href="adminAddToBranch.php">
+          <span class="material-icons-sharp"> add </span>
+          <h3>Add Branch</h3>
+        </a>
         <a href="adminCars.php">
           <span class="material-icons-sharp"> time_to_leave </span>
           <h3>Cars</h3>
         </a>
+        <a href="adminAddToCar.php">
+          <span class="material-icons-sharp"> add </span>
+          <h3> Add Cars</h3>
+        </a>
+
         <a href="adminMessages.php">
           <span class="material-icons-sharp">mail_outline</span>
           <h3>Messages</h3>
         </a>
-        <a href="Connection/logout.php">
+        <a href="adminLogin.php" onclick="checker()">
           <span class="material-icons-sharp">logout</span>
           <h3>Logout</h3>
         </a>
@@ -94,7 +103,7 @@ $sql7->execute();
     <main>
       <h1>Dashboard</h1>
 
-      <?php 
+      <?php
       $total = $sql2->fetch(PDO::FETCH_ASSOC);
       $totalCar = $sql3->fetch(PDO::FETCH_ASSOC);
       $totalUser = $sql4->fetch(PDO::FETCH_ASSOC);
@@ -157,7 +166,7 @@ $sql7->execute();
 
       <div class="recent-orders">
         <h2>Recent Rentals</h2>
-        <table>
+        <table style="border-spacing: 30px;">
           <thead>
             <tr>
               <th>Book Id</th>
@@ -200,37 +209,27 @@ $sql7->execute();
       </div>
     </main>
     <div class="right">
-      <div class="top">
-        <button id="menu-btn">
-          <span class="material-icons-sharp">menu</span>
-        </button>
-        <div class="profile">
-          <div class="info">
-            <p>Hey, <b><?php echo $admin['Name'] ?></b></p>
-            <small class="text-muted">Admin</small>
-          </div>
-        </div>
-      </div>
       <div class="recent-updates">
         <h2>Recent Reviews</h2>
         <div class="updates">
 
-          <?php for($i = 0; $i<20; $i++){ 
+          <?php for ($i = 0; $i < 20; $i++) {
             $review = $sql6->fetch(PDO::FETCH_ASSOC);
-            if($review){
+            if ($review) {
           ?>
 
-          <div class="update">
-            <div class="profile-photo">
-              <img src="<?php echo $review['UserImage'] ?>" alt="">
-            </div>
-            <div class="message">
-              <p><b><?php echo $review['Name']." ".$review['LastName']." : ";
-              ?>
-              </b> <?php echo $review['Message']?></p>
-            </div>
-          </div>
-          <?php }} ?>
+              <div class="update">
+                <div class="profile-photo">
+                  <img src="<?php echo $review['UserImage'] ?>" alt="">
+                </div>
+                <div class="message">
+                  <p><b><?php echo $review['Name'] . " " . $review['LastName'] . " : ";
+                        ?>
+                    </b> <?php echo $review['Message'] ?></p>
+                </div>
+              </div>
+          <?php }
+          } ?>
         </div>
       </div>
     </div>
