@@ -24,12 +24,6 @@ if (isset($but)) {
     if ($count == 0) {
         if ($userPassword == $userCPassword) {
             if ($userPassword >= 6) {
-                $userControl = $db->prepare("SELECT * FROM users WHERE Email = '$userMail'");
-                $userControl->execute();
-                $count = $userControl->rowCount();
-                $pass = md5($userCPassword);
-                $role = 0;
-                print_r($userfName);
                 $registerUser = $db->prepare("INSERT INTO users (Name, LastName, Password, IdGender, Email, PhoneNumber, IdNumber) values('$userfName', '$userlName', '$userPassword', '$userGender', '$userMail', '$userPhoneNumber', '$idNumber')");
                 $registerUser->execute();
 

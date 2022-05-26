@@ -1,0 +1,161 @@
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`;
+USE `rent_a_ride`;
+DROP TABLE IF EXISTS `gender`;
+CREATE TABLE `gender` (
+  `IdGender` int NOT NULL AUTO_INCREMENT,
+  `Gender` varchar(55) NOT NULL,
+  PRIMARY KEY (`IdGender`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`
+USE `rent_a_ride`;
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `IdUser` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(45) DEFAULT NULL,
+  `LastName` varchar(45) DEFAULT NULL,
+  `Password` varchar(100) DEFAULT NULL,
+  `IdGender` int DEFAULT NULL,
+  `Email` varchar(45) NOT NULL,
+  `PhoneNumber` varchar(45) NOT NULL,
+  `RegDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `Role` int NOT NULL DEFAULT '0',
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `UserImage` text,
+  `BirthDate` date DEFAULT NULL,
+  `IdNumber` varchar(45) NOT NULL,
+  PRIMARY KEY (`IdUser`),
+  UNIQUE KEY `Email_UNIQUE` (`Email`),
+  UNIQUE KEY `PhoneNumber_UNIQUE` (`PhoneNumber`),
+  UNIQUE KEY `IdNumber_UNIQUE` (`IdNumber`),
+  KEY `IdGender` (`IdGender`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`IdGender`) REFERENCES `gender` (`IdGender`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`;
+USE `rent_a_ride`;
+DROP TABLE IF EXISTS `status`;
+CREATE TABLE `status` (
+  `IdStatus` int NOT NULL AUTO_INCREMENT,
+  `Status` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`IdStatus`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`;
+USE `rent_a_ride`;
+DROP TABLE IF EXISTS `transmission`;
+CREATE TABLE `transmission` (
+  `IdTransmission` int NOT NULL AUTO_INCREMENT,
+  `Transmission` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`IdTransmission`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`;
+USE `rent_a_ride`;
+DROP TABLE IF EXISTS `branch`;
+CREATE TABLE `branch` (
+  `IdBranch` int NOT NULL AUTO_INCREMENT,
+  `BranchName` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`IdBranch`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`;
+USE `rent_a_ride`;
+DROP TABLE IF EXISTS `fueltype`;
+CREATE TABLE `fueltype` (
+  `IdFuelType` int NOT NULL AUTO_INCREMENT,
+  `FuelType` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`IdFuelType`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`;
+USE `rent_a_ride`;
+DROP TABLE IF EXISTS `cartype`;
+CREATE TABLE `cartype` (
+  `IdCarType` int NOT NULL AUTO_INCREMENT,
+  `CarType` varchar(45) NOT NULL,
+  PRIMARY KEY (`IdCarType`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`;
+USE `rent_a_ride`;
+DROP TABLE IF EXISTS `cars`;
+CREATE TABLE `cars` (
+  `IdCar` int NOT NULL AUTO_INCREMENT,
+  `CarName` varchar(120) NOT NULL,
+  `ModelYear` int NOT NULL,
+  `CreationDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `IdTransmission` int NOT NULL,
+  `SeatingCapacity` int NOT NULL,
+  `PricePerDay` int NOT NULL,
+  `IdCarType` int DEFAULT NULL,
+  `CarImage` text,
+  `IdStatus` int NOT NULL DEFAULT '0',
+  `IdBranch` int NOT NULL,
+  `IdFuelType` int NOT NULL,
+  PRIMARY KEY (`IdCar`),
+  KEY `IdBranch` (`IdBranch`),
+  KEY `IdTransmission` (`IdTransmission`),
+  KEY `IdStatus` (`IdStatus`),
+  KEY `IdFuelType` (`IdFuelType`),
+  CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`IdBranch`) REFERENCES `branch` (`IdBranch`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `cars_ibfk_2` FOREIGN KEY (`IdTransmission`) REFERENCES `transmission` (`IdTransmission`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `cars_ibfk_3` FOREIGN KEY (`IdStatus`) REFERENCES `status` (`IdStatus`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `cars_ibfk_4` FOREIGN KEY (`IdFuelType`) REFERENCES `fueltype` (`IdFuelType`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`;
+USE `rent_a_ride`;
+DROP TABLE IF EXISTS `review`;
+CREATE TABLE `review` (
+  `IdReview` int NOT NULL AUTO_INCREMENT,
+  `Message` varchar(255) NOT NULL,
+  PRIMARY KEY (`IdReview`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`;
+USE `rent_a_ride`;
+DROP TABLE IF EXISTS `booking`;
+CREATE TABLE `booking` (
+  `IdBooking` int NOT NULL AUTO_INCREMENT,
+  `IdUser` int NOT NULL,
+  `IdCar` int NOT NULL,
+  `FromDate` date NOT NULL,
+  `ToDate` date NOT NULL,
+  `Price` int DEFAULT NULL,
+  `PostingDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `IdStatus` int DEFAULT '1',
+  `IdBranch` int NOT NULL,
+  `IdReview` int DEFAULT NULL,
+  PRIMARY KEY (`IdBooking`),
+  KEY `IdUser` (`IdUser`),
+  KEY `IdCar` (`IdCar`),
+  KEY `IdBranch` (`IdBranch`),
+  KEY `IdStatus` (`IdStatus`),
+  KEY `IdReview` (`IdReview`),
+  CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`IdUser`) REFERENCES `users` (`IdUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`IdCar`) REFERENCES `cars` (`IdCar`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`IdBranch`) REFERENCES `branch` (`IdBranch`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `booking_ibfk_4` FOREIGN KEY (`IdStatus`) REFERENCES `status` (`IdStatus`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `booking_ibfk_5` FOREIGN KEY (`IdReview`) REFERENCES `review` (`IdReview`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE DATABASE  IF NOT EXISTS `rent_a_ride`;
+USE `rent_a_ride`;
+DROP TABLE IF EXISTS `contactus`;
+CREATE TABLE `contactus` (
+  `IdContactUs` int NOT NULL AUTO_INCREMENT,
+  `FullName` varchar(55) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Subject` varchar(100) NOT NULL,
+  `Message` longtext NOT NULL,
+  `PostingDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `PhoneNumber` varchar(45) NOT NULL,
+  PRIMARY KEY (`IdContactUs`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

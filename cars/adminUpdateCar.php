@@ -134,10 +134,11 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
                         $sqlBranch->execute();
                         ?>
                         <div class="input-field">
-                            <select name="branch" required class="branch">
-                                <option selected disabled>Select Branch</option>
+                            <select name="branch" required class="branch">  
                                 <?php while ($branch = $sqlBranch->fetch(PDO::FETCH_ASSOC)) { ?>
-                                    <option value="<?php echo $branch['IdBranch'] ?>"><?php echo $branch['BranchName'] ?></option>
+                                    <option 
+                                    <?php if($theCar['BranchName'] == $branch['BranchName']) {?> selected <?php } ?>  
+                                    value="<?php echo $branch['IdBranch'] ?>"><?php echo $branch['BranchName'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -152,9 +153,13 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
                         <div class="input-field">
                             <label>Status</label>
                             <select name="xStatus" required>
-                                <option disabled selected>Availability Status</option>
-                                <option value="1" <?php echo $theCar['Status'] == '1' ? 'selected=""' : '' ?>>Active</option>
-                                <option value="0" <?php echo $theCar['Status'] == '0' ? 'selected=""' : '' ?>>Passive</option>
+                                
+                                <option 
+                                <?php if($theCar['IdStatus'] == "1") {?> selected <?php } ?>  
+                                value="1" <?php echo $theCar['Status'] == '1' ? 'selected=""' : '' ?>>Active</option>
+                                <option 
+                                <?php if($theCar['IdStatus'] == "0") {?> selected <?php } ?>  
+                                value="0" <?php echo $theCar['Status'] == '0' ? 'selected=""' : '' ?>>Passive</option>
                             </select>
 
                         </div>
