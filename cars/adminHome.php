@@ -208,31 +208,7 @@ $sql7->execute();
         </table>
       </div>
     </main>
-    <div class="right">
-      <div class="recent-updates">
-        <h2>Recent Reviews</h2>
-        <div class="updates">
-
-          <?php for ($i = 0; $i < 20; $i++) {
-            $review = $sql6->fetch(PDO::FETCH_ASSOC);
-            if ($review) {
-          ?>
-
-              <div class="update">
-                <div class="profile-photo">
-                  <img src="<?php echo $review['UserImage'] ?>" alt="">
-                </div>
-                <div class="message">
-                  <p><b><?php echo $review['Name'] . " " . $review['LastName'] . " : ";
-                        ?>
-                    </b> <?php echo $review['Message'] ?></p>
-                </div>
-              </div>
-          <?php }
-          } ?>
-        </div>
-      </div>
-    </div>
+    
   </div>
   <script src="js/script.js"></script>
 </body>

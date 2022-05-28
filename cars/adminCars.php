@@ -117,7 +117,7 @@ $sql2->execute();
 
             ?>
               <tr>
-                <td><img src="<?php echo substr($car['CarImage'], 3) ?>" alt=""></td>
+                <td><img style="width: 300px; border-radius:15px" src="<?php echo substr($car['CarImage'], 3) ?>" alt=""></td>
                 <td><?php echo $car['IdCar'] ?></td>
                 <td><?php echo $car['BranchName'] ?></td>
                 <td><?php echo $car['CarName'] ?></td>

@@ -15,11 +15,15 @@ if ($sql->rowCount() == 0) {
   exit;
 }
 
-$sql2 = $db->prepare("SELECT * FROM booking b, users u, cars c, branch br, status s WHERE 
-u.Email = '$email' AND 
-b.IdCar = c.IdCar AND
-b.IdBranch = br.IdBranch AND
-b.IdStatus = s.IdStatus");
+$sql2 = $db->prepare("SELECT * FROM booking b, users u, cars c, branch br, carType ct, fueltype ft, transmission t, status s WHERE 
+c.IdCar = b.IdCar AND
+br.IdBranch = b.IdBranch AND
+s.IdStatus = b.IdStatus AND
+ct.IdCarType = c.IdCarType AND
+u.IdUser = b.IdUser AND
+ft.IdFuelType = c.IdFuelType AND
+t.IdTransmission = c.IdTransmission AND
+u.Email = '$email'");
 $sql2->execute();
 
 ?>
@@ -77,10 +81,11 @@ $sql2->execute();
         <table>
           <thead>
             <tr>
-              <th>Customer Name</th>
-              <th>Customer Surname</th>
               <th>Car Name</th>
               <th>Car Model Year</th>
+              <th>Car Type</th>
+              <th>Car Fuel Type</th>
+              <th>Car Transmission</th>
               <th>From Date</th>
               <th>To Date</th>
               <th>Branch</th>
@@ -96,13 +101,15 @@ $sql2->execute();
             ?>
 
               <tr>
-                <td><?php echo $book['Name'] ?></td>
-                <td><?php echo $book['LastName'] ?></td>
                 <td><?php echo $book['CarName'] ?></td>
                 <td><?php echo $book['ModelYear'] ?></td>
+                <td><?php echo $book['CarType'] ?></td>
+                <td><?php echo $book['FuelType'] ?></td>
+                <td><?php echo $book['Transmission'] ?></td>
                 <td><?php echo $book['FromDate'] ?></td>
                 <td><?php echo $book['ToDate'] ?></td>
                 <td><?php echo $book['BranchName'] ?></td>
+                
                 <td><?php echo $book['Price'] ?>$</td>
               </tr>
 

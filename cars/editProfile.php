@@ -98,9 +98,12 @@ $user = $sql->fetch(PDO::FETCH_ASSOC);
                         <div class="input-field">
                             <label>Gender</label>
                             <select name="gender">
-                                <option disabled selected value="">Select Gender</option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
+                                <option
+                                <?php if($user['IdGender'] == "1") {?> selected <?php } ?>  
+                                value="1">Male</option>
+                                <option
+                                <?php if($user['IdGender'] == "2") {?> selected <?php } ?> 
+                                value="2">Female</option>
                             </select>
                         </div>
 
@@ -112,11 +115,6 @@ $user = $sql->fetch(PDO::FETCH_ASSOC);
                         <div class="input-field">
                             <label>Phone Number</label>
                             <input type="tel" name="phoneNumber" value="<?php echo $user['PhoneNumber'] ?>">
-                        </div>
-
-                        <div class="input-field">
-                            <label>Birth Date</label>
-                            <input name="birthDate" type="text" disabled value="<?php echo $user['BirthDate'] ?>" required>
                         </div>
 
                     </div>

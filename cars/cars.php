@@ -104,10 +104,10 @@ $sql2->execute();
 
                 <div class="container">
                     <?php if ($car) {
-                        if ($car['IdStatus'] == 1) { ?>
+                         ?>
                             <div class="col2" id="cont">
                                 <div class="inspectImage">
-                                    <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
+                                    <img style="width: 475px;" src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
                                 </div>
                                 <div class="inspectText">
                                     <p class="date"><?php echo $car['ModelYear'] ?></p>
@@ -123,16 +123,14 @@ $sql2->execute();
                                 </div>
                             </div>
 
-                        <?php }
+                        <?php 
                     }
                     $car = $sql2->fetch(PDO::FETCH_ASSOC);
                     if ($car) {
-                        if ($car['IdStatus'] = 1) {
-
                         ?>
                             <div class="col2" id="cont">
                                 <div class="inspectImage">
-                                    <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
+                                    <img style="width: 475px;" src="<?php echo substr($car['CarImage'], 3) ?>" alt="Car">
                                 </div>
                                 <div class="inspectText">
                                 <p class="date"><?php echo $car['ModelYear'] ?></p>
@@ -146,7 +144,7 @@ $sql2->execute();
                                     <h4><?php echo $car['PricePerDay'] ?> $ </h4>
                                 </div>
                             </div>
-                    <?php }
+                    <?php 
                     } ?>
                 </div>
 

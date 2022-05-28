@@ -111,7 +111,7 @@ $sql2->execute();
             <div class="col3">
               <div class="item">
                 <div class="zoom">
-                  <img src="img/<?php echo $car['CarImage'] ?>" alt="" />
+                  <img src="<?php echo substr($car['CarImage'], 3) ?>" alt="" />
                 </div>
                 <div class="itemText">
                   <h3><?php echo $car['CarName'] ?></h3>

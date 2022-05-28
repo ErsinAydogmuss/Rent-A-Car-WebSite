@@ -39,11 +39,12 @@ if (isset($button)) {
     $xPrice = htmlspecialchars($_POST['xPrice']);
     $xStatus = htmlspecialchars($_POST['xStatus']);
     $branch = htmlspecialchars($_POST['branch']);
+    $carType = htmlspecialchars($_POST['type']);
 
     
 
     if (move_uploaded_file($_FILES['fileImage']['tmp_name'], $newName)) {
-        $ekle = $db->prepare("INSERT INTO cars (CarName, ModelYear, IdTransmission, SeatingCapacity, IdFuelType, PricePerDay, CarImage, IdStatus, IdBranch) values('$carName', '$modelYear', '$transmission', '$seatingCapacity', '$fuelType', '$xPrice','$newName', '$xStatus', '$branch' )");
+        $ekle = $db->prepare("INSERT INTO cars (CarName, ModelYear, IdTransmission, SeatingCapacity, IdFuelType, PricePerDay, CarImage, IdStatus, IdBranch, IdCarType) values('$carName', '$modelYear', '$transmission', '$seatingCapacity', '$fuelType', '$xPrice','$newName', '$xStatus', '$branch', '$carType')");
         $ekle->execute();
         header("Location:../adminCars.php");
     }

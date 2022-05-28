@@ -30,7 +30,6 @@ $sql2->execute();
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
   <link rel="stylesheet" href="./css/admin.css" />
 </head>
-
 <body>
   <div class="container">
     <aside>

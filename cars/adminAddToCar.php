@@ -158,6 +158,21 @@ if ($admin['Role'] == 0) {
                             <label>Price Per Day</label>
                             <input name="xPrice" placeholder="Price" type="text" required>
                         </div>
+
+                        <?php
+                        $sqlType = $db->prepare("SELECT * FROM carType");
+                        $sqlType->execute();
+                        ?>
+                        <div class="input-field">
+                            <label>Car Type</label>
+                            <select name="type" class="branch">
+                                <option selected disabled>Select Car Type</option>
+                                <?php while ($type = $sqlType->fetch(PDO::FETCH_ASSOC)) { ?>
+                                    <option value="<?php echo $type['IdCarType'] ?>"><?php echo $type['CarType'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
                         <?php
                         $sqlBranch = $db->prepare("SELECT * FROM branch");
                         $sqlBranch->execute();
