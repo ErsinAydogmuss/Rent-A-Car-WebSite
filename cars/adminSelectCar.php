@@ -14,14 +14,17 @@ if ($admin['Role'] == 0) {
   exit;
 }
 
-$sql2 = $db->prepare("SELECT * FROM users u, gender g WHERE u.IdGender = g.IdGender");
+$IdCar = $_GET['IdCar'];
+
+$sql2 = $db->prepare("SELECT * FROM booking b, users u, cars c, branch br, status s WHERE 
+b.IdUser = u.IdUser AND 
+b.IdCar = $IdCar AND
+b.IdBranch = br.IdBranch AND
+b.IdStatus = s.IdStatus
+group by b.IdBooking");
 $sql2->execute();
 
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,13 +32,9 @@ $sql2->execute();
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Customers Page</title>
-
+  <title>Admin Panel</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
-
-
   <link rel="stylesheet" href="./css/admin.css" />
-
 </head>
 
 <body>
@@ -81,28 +80,35 @@ $sql2->execute();
           <span class="material-icons-sharp">mail_outline</span>
           <h3>Messages</h3>
         </a>
+        <a href="adminSelectCustomer.php">
+          <span class="material-icons-sharp">check_box_outline_blank</span>
+          <h3>Select Customer</h3>
+        </a>
         <a href="adminLogin.php" onclick="checker()">
           <span class="material-icons-sharp">logout</span>
           <h3>Logout</h3>
         </a>
       </div>
     </aside>
-
+    
     <main>
-      <h1>Customers</h1>
+      <h1>Trips</h1>
       <div class="insights cust">
         <table>
           <thead>
             <tr>
-              <th>Customer ID</th>
-              <th>Name</th>
-              <th>LastName</th>
-              <th>Gender</th>
-              <th>Email</th>
-              <th>Phone Number</th>
-              <th>Birthdate</th>
-              <th>Registration Date</th>
-              <th></th>
+              <th>Book Id</th>
+              <th>Customer Id</th>
+              <th>Customer Name</th>
+              <th>Customer Surname</th>
+              <th>Car Id</th>
+              <th>Car Name</th>
+              <th>Car Model Year</th>
+              <th>From Date</th>
+              <th>To Date</th>
+              <th>Branch</th>
+              <th>Price</th>
+              <th>Status</th>
               <th></th>
             </tr>
           </thead>
@@ -110,43 +116,43 @@ $sql2->execute();
 
             <?php
 
-            while ($user = $sql2->fetch(PDO::FETCH_ASSOC)) {
+            while ($book = $sql2->fetch(PDO::FETCH_ASSOC)) {
 
             ?>
 
-
               <tr>
-                <td><?php echo $user['IdUser'] ?></td>
-                <td><?php echo $user['Name'] ?></td>
-                <td><?php echo $user['LastName'] ?></td>
-                <td><?php echo $user['Gender'] ?></td>
-                <td><?php echo $user['Email'] ?></td>
-                <td><?php echo $user['PhoneNumber'] ?></td>
-                <td><?php echo $user['BirthDate'] ?></td>
-                <td><?php echo $user['RegDate'] ?></td>
-                <td>
-                  <a href="connection/process11.php?IdUser=<?php echo $user['IdUser']; ?>&userDelete=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;" onclick="checker()">Delete</button></a>
-                </td>
-                <td>
-                  <a href="adminSelectCustomer.php?IdUser=<?php echo $user['IdUser']; ?>"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;" onclick="checker()">View All Booking</button></a>
+                <td><?php echo $book['IdBooking'] ?></td>
+                <td><?php echo $book['IdUser'] ?></td>
+                <td><?php echo $book['Name'] ?></td>
+                <td><?php echo $book['LastName'] ?></td>
+                <td><?php echo $book['IdCar'] ?></td>
+                <td><?php echo $book['CarName'] ?></td>
+                <td><?php echo $book['ModelYear'] ?></td>
+                <td><?php echo $book['FromDate'] ?></td>
+                <td><?php echo $book['ToDate'] ?></td>
+                <td><?php echo $book['BranchName'] ?></td>
+                <td><?php echo $book['Price'] ?>$</td>
+                <td><?php echo $book['Status'] ?></td>
+                <td class="but">
+                  <a href="connection/process13.php?IdBooking=<?php echo $book['IdBooking']; ?>&finishRental=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;" onclick="checker()">Finish Rental</button></a>
                 </td>
               </tr>
 
-
-
-            <?php  }
-
-            ?>
+            <?php } ?>
 
           </tbody>
         </table>
       </div>
     </main>
 
+
+
+
+
+
+
+
   </div>
-
-
-
   <script src="js/script.js"></script>
 </body>
 

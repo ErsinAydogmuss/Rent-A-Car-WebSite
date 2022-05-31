@@ -20,8 +20,6 @@ if (isset($paymentBut)) {
     $loca =$db -> prepare("SELECT * FROM branch WHERE BranchName = '$location'");
     $loca -> execute();
     $theLoc = $loca->fetch(PDO::FETCH_ASSOC);
-    
-   
 
     $sql = $db->prepare("INSERT INTO `booking` (`IdUser`, `IdCar`, `FromDate`, `ToDate`, `IdBranch`, `Price`, `IdStatus`) VALUES ('$theUser[IdUser]','$IdCar','$fromDate','$toDate','$theLoc[IdBranch]','$totalPrice','1')");
     $sql -> execute();

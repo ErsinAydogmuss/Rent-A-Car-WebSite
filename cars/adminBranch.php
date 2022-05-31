@@ -90,6 +90,7 @@ $sql2->execute();
               <th>Branch Id</th>
               <th>Branch Name</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -104,6 +105,9 @@ $sql2->execute();
                 <td><?php echo $branch['BranchName'] ?></td>
                 <td>
                   <a href="connection/process12.php?IdBranch=<?php echo $branch['IdBranch']; ?>&branchDelete=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Delete</button></a>
+                </td>
+                <td>
+                  <a href="adminSelectBranchTrips.php?IdBranch=<?php echo $branch['IdBranch']; ?>"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">View Booking</button></a>
                 </td>
               </tr>
             <?php } ?>

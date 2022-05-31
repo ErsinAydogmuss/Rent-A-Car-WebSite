@@ -157,10 +157,13 @@ $theCar = $sql2->fetch(PDO::FETCH_ASSOC);
                                 
                                 <option 
                                 <?php if($theCar['IdStatus'] == "1") {?> selected <?php } ?>  
-                                value="1" <?php echo $theCar['Status'] == '1' ? 'selected=""' : '' ?>>Active</option>
+                                value="1" <?php echo $theCar['Status'] == '1' ? 'selected=""' : '' ?>>Available</option>
                                 <option 
                                 <?php if($theCar['IdStatus'] == "0") {?> selected <?php } ?>  
-                                value="0" <?php echo $theCar['Status'] == '0' ? 'selected=""' : '' ?>>Passive</option>
+                                value="0" <?php echo $theCar['Status'] == '0' ? 'selected=""' : '' ?>>In Use</option>
+                                <option 
+                                <?php if($theCar['IdStatus'] == "2") {?> selected <?php } ?>  
+                                value="2" <?php echo $theCar['Status'] == '2' ? 'selected=""' : '' ?>>In Repair</option>
                             </select>
 
                         </div>

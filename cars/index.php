@@ -116,7 +116,8 @@ $sql2->execute();
                 <div class="itemText">
                   <h3><?php echo $car['CarName'] ?></h3>
                   <p>
-                    <?php echo $car['ModelYear'] ?> Model<br /><?php echo $car['SeatingCapacity'] ?> Capacity<br /><?php echo $car['Transmission'] ?> <br /><?php echo $car['FuelType'] ?><br /><?php echo $car['PricePerDay'] ?> $
+                    <?php echo $car['ModelYear'] ?> Model<br /><?php echo $car['SeatingCapacity'] ?> Capacity<br /><?php echo $car['Transmission'] ?> <br /><?php echo $car['FuelType'] ?><br />
+                    <?php echo $car['PricePerDay'] ?> 
                     $<br />
                   </p>
                 </div>

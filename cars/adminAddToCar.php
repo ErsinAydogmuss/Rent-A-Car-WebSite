@@ -191,8 +191,8 @@ if ($admin['Role'] == 0) {
                             <label>Status</label>
                             <select name="xStatus" required>
                                 <option disabled selected>Availability Status</option>
-                                <option value="1">Active</option>
-                                <option value="0">Passive</option>
+                                <option value="1">Available</option>
+                                <option value="0">In Use</option>
                             </select>
                         </div>
 

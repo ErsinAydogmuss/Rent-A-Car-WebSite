@@ -107,6 +107,7 @@ $sql2->execute();
               <th>Status</th>
               <th></th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -135,6 +136,9 @@ $sql2->execute();
                 </td>
                 <td>
                   <a href="connection/process2.php?IdCar=<?php echo $car['IdCar']; ?>&carDelete=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">Delete</button></a>
+                </td>
+                <td>
+                  <a href="adminSelectCar.php?IdCar=<?php echo $car['IdCar']; ?>"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;">View All Booking</button></a>
                 </td>
               </tr>
             <?php } ?>

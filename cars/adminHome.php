@@ -94,6 +94,10 @@ $sql7->execute();
           <span class="material-icons-sharp">mail_outline</span>
           <h3>Messages</h3>
         </a>
+        <a href="adminSelectRepairCars.php">
+          <span class="material-icons-sharp">build_circle</span>
+          <h3>Cars In Repair</h3>
+        </a>
         <a href="adminLogin.php" onclick="checker()">
           <span class="material-icons-sharp">logout</span>
           <h3>Logout</h3>

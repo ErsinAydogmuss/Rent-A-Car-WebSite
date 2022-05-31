@@ -104,6 +104,7 @@ $sql2->execute();
               <th>Price</th>
               <th>Status</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -127,6 +128,9 @@ $sql2->execute();
                 <td><?php echo $book['BranchName'] ?></td>
                 <td><?php echo $book['Price'] ?>$</td>
                 <td><?php echo $book['Status'] ?></td>
+                <td class="but">
+                  <a href="adminSelectTrips.php?IdBooking=<?php echo $book['IdBooking']; ?>"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;" onclick="checker()">View Detail</button></a>
+                </td>
                 <td class="but">
                   <a href="connection/process13.php?IdBooking=<?php echo $book['IdBooking']; ?>&finishRental=ok"><button style="width: 75px;height: 50px; background: #b68e64; border-radius: 15px; cursor: pointer; color: #fff; font-size: 16px;" onclick="checker()">Finish Rental</button></a>
                 </td>
